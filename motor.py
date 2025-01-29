@@ -8,16 +8,10 @@ class Motor_left:
     self.pwm1.duty_u16(0)
  def off(self):
     self.pwm1.duty_u16(0)
- def Forward(self):
-    self.m1Dir.value(0) # forward = 0 reverse = 1 motor 1
-    self.pwm1.duty_u16(int(65535*100/100)) # speed range 0-100 motor 2
- def Reverse(self):
-    self.m1Dir.value(1)
-    self.pwm1.duty_u16(int(65535*30/100))
- def speed_change(self, speed):
+ def speed_change(self, speed, direction):
     self.pwm1.duty_u16(int(65535*speed/100))
- def direction_change(self, direction): # 0 = forward, 1 = reverse
-    self.m2Dir.value(direction)
+    self.m1Dir.value(direction)
+    #direction: forward = 0, reverse = 1
 
 class Motor_right:
  def __init__(self):
@@ -27,13 +21,6 @@ class Motor_right:
     self.pwm2.duty_u16(0)
  def off(self):
     self.pwm2.duty_u16(0)
- def Forward(self):
-    self.m2Dir.value(0) # forward = 0 reverse = 1 motor 2
-    self.pwm2.duty_u16(int(65535*100/100)) # speed range 0-100 motor 2
- def Reverse(self):
-    self.m2Dir.value(1)
-    self.pwm2.duty_u16(int(65535*30/100))
- def speed_change(self, speed):
+ def speed_change(self, speed, direction):
     self.pwm1.duty_u16(int(65535*speed/100))
- def direction_change(self, direction): # 0 = forward, 1 = reverse
     self.m2Dir.value(direction)

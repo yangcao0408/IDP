@@ -16,17 +16,11 @@ def blinking(flag):
         light.value(not light.value())
         time.sleep(0.5)
 
-
-
-
 motor_left = Motor_left()
 motor_right = Motor_right()
 
 
 start_time = time.time()
-
-
-
 
 # Initialize PID
 pid = PIDController(Kp=1.0, Ki=0.1, Kd=0.05)
@@ -39,8 +33,7 @@ flag = True # Remove this later
 
 #Put a timer of 4.5 mins
 while (time.time() - start_time < 270): # 4.5 mins
-
-
+    
     # Lighting
     threading.Timer(0, blinking(flag)).start() # need to set flag when vehicle leaves box
     # Main loop here, with control theory
@@ -57,9 +50,9 @@ while (time.time() - start_time < 270): # 4.5 mins
 
     # Adjust motor speeds
     left_speed, right_speed = pid.motor_speed(base_speed, correction)
-
-
-
+    motor_left.speed_change(speed = left_speed, direction = 0)
+    motor_right.speed_change(speed = right_speed, direction = 0)
+    #Please note that if motors are placed in a mirrored configuration, their direction of rotation will need to be opposite to drive the same way
 
 
 # If 270 seconds reached
