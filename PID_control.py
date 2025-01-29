@@ -42,25 +42,3 @@ class PIDController:
         right_speed = max(0, min(100, right_speed))
 
         return left_speed, right_speed
-
-# Initialize PID
-pid = PIDController(Kp=1.0, Ki=0.1, Kd=0.05)
-
-# Main control loop
-base_speed = 50  # Base speed of the robot
-last_time = time.time()
-
-while True:
-    sensor_values = [1, 0, 1, 0]  # Replace with actual sensor input
-
-    error = pid.calculate_error(sensor_values)
-
-    current_time = time.time()
-    dt = current_time - last_time
-    correction = pid.compute(error, dt)
-    last_time = current_time
-    #Time keeping to calculate dt and correction
-
-    # Adjust motor speeds
-    left_speed, right_speed = pid.motor_speed(base_speed, correction)
-
