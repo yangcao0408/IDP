@@ -30,7 +30,7 @@ def scan_for_QR(trytime):
   #If final code is returned as 0 then nothing was scanned
 
   while time.time() - start_time < trytime:
-    sleep(TINY_CODE_READER_DELAY)
+    time.sleep(TINY_CODE_READER_DELAY)
     read_data = i2c.readfrom(TINY_CODE_READER_I2C_ADDRESS, TINY_CODE_READER_I2C_BYTE_COUNT)
     
     message_length, = struct.unpack_from(TINY_CODE_READER_LENGTH_FORMAT, read_data,TINY_CODE_READER_LENGTH_OFFSET)
