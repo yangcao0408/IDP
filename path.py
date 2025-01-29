@@ -223,3 +223,25 @@ def path4(pid, collec_flag):
             pass
 
         # Put collection code here
+
+# Returning to starting point
+def back(pid, start_flag):
+    # Assuming at collection area, facing collecting area
+    if pid.sensor_values() == [0, 0, 1, 1]:
+        pid.turn_right()
+        flag1 = True
+        while pid.sensor_values() == [0, 0, 1, 1]:
+            pass
+    
+    if pid.sensor_values() == [1, 1, 0, 0] and flag1 == True:
+        pid.turn_left()
+        flag2 = True
+        while pid.sensor_values() == [1, 1, 0, 0]:
+            pass
+
+    if pid.sensor_values() == [1, 1, 1, 1] and flag2 == True:
+        start_flag = False
+        while pid.sensor_values() == [1, 1, 1, 1]:
+            pass
+
+    return start_flag
