@@ -48,9 +48,8 @@ while (time.time() - start_time < 270): # 4.5 mins
 
     # Adjust motor speeds
     left_speed, right_speed = pid.motor_speed(base_speed, correction)
-    motor_left.speed_change(speed = left_speed)
-    motor_right.speed_change(speed = right_speed)
-    #Currently this loop only constantly adjusts the desired motor speed, if the motor is driving or not is another matter that has not been set
+    motor_left.speed_change(speed = left_speed, direction = 0)
+    motor_right.speed_change(speed = right_speed, direction = 0)
     #Please note that if motors are placed in a mirrored configuration, their direction of rotation will need to be opposite to drive the same way
 
 
