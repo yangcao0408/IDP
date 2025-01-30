@@ -54,7 +54,7 @@ while (time.time() - start_time < 270): # 4.5 mins
     motor_left.speed_change(speed = left_speed, direction = 0)
     motor_right.speed_change(speed = right_speed, direction = 0)
     #Please note that if motors are placed in a mirrored configuration, their direction of rotation will need to be opposite to drive the same way
-
+    time.sleep(0.05)
 
 # If 270 seconds reached
 # Write code to return vehicle back to initial position
