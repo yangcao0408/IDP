@@ -1,6 +1,5 @@
 from machine import Pin
 import time
-import threading
 from motor import *
 from PID_control import *
 
@@ -37,7 +36,7 @@ last_time = time.time()
 while (time.time() - start_time < 270): # 4.5 mins
     
     # Lighting
-    threading.Timer(0, blinking(flag)).start() # need to set flag when vehicle leaves box
+    #threading.Timer(0, blinking(flag)).start() # need to set flag when vehicle leaves box
     # Main loop here, with control theory
     sensor_value = [p_ll.value(), p_l.value(), p_r.value(), p_rr.value()]
     pid.sensor_values = sensor_value
