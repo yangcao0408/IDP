@@ -11,12 +11,12 @@ p_rr = Pin(11, Pin.IN) # Input pin for right most sensor
 
 light = Pin(5, Pin.OUT) # Output pin for light
 
-button = Pin(6, Pin.IN, Pin.PULL_DOWN) # Input pin for button
+#button = Pin(6, Pin.IN, Pin.PULL_DOWN) # Input pin for button
 
-def blinking(flag):
-    if flag == True: # If vehicle leaves the box
-        light.value(not light.value())
-        time.sleep(0.5)
+#def blinking(flag):
+    #if flag == True: # If vehicle leaves the box
+        #light.value(not light.value())
+        #time.sleep(0.5)
 
 motor_left = Motor_left()
 motor_right = Motor_right()
@@ -28,10 +28,10 @@ start_time = time.time()
 pid = PIDController(Kp=1.0, Ki=0.1, Kd=0.05)
 
 # Main control loop
-base_speed = 50  # Base speed of the robot
+base_speed = 30  # Base speed of the robot
 last_time = time.time()
 
-flag = True # Remove this later
+#flag = True # Remove this later
 
 #Put a timer of 4.5 mins
 while (time.time() - start_time < 270): # 4.5 mins
