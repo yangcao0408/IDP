@@ -1,0 +1,37 @@
+from machine import Pin
+import time
+import threading
+from motor import *
+
+motor_left = Motor_left()
+motor_right = Motor_right()
+
+motor_left.speed_change(speed = 10, direction = 0)
+motor_right.speed_change(speed = 10, direction = 1)
+time.sleep(2)
+motor_left.speed_change(speed = 0, direction = 0)
+motor_right.speed_change(speed = 0, direction = 1)
+time.sleep(2)
+motor_left.speed_change(speed = 10, direction = 0)
+motor_right.speed_change(speed = 0, direction = 1)
+time.sleep(2)
+motor_left.speed_change(speed = 0, direction = 0)
+motor_right.speed_change(speed = 0, direction = 1)
+time.sleep(2)
+motor_left.speed_change(speed = 20, direction = 0)
+motor_right.speed_change(speed = 20, direction = 1)
+time.sleep(2)
+motor_left.speed_change(speed = 0, direction = 0)
+motor_right.speed_change(speed = 0, direction = 1)
+time.sleep(2)
+motor_left.speed_change(speed = 30, direction = 0)
+motor_right.speed_change(speed = 30, direction = 1)
+time.sleep(2)
+motor_left.speed_change(speed = 0, direction = 0)
+motor_right.speed_change(speed = 0, direction = 1)
+time.sleep(2)
+motor_left.speed_change(speed = 40, direction = 0)
+motor_right.speed_change(speed = 40, direction = 1)
+time.sleep(2)
+motor_left.speed_change(speed = 0, direction = 0)
+motor_right.speed_change(speed = 0, direction = 1)
