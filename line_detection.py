@@ -29,6 +29,7 @@ pid = PIDController(Kp=1.0, Ki=0.1, Kd=0.05)
 # Main control loop
 base_speed = 30  # Base speed of the robot
 last_time = time.time()
+time.sleep(0.05)
 
 #flag = True # Remove this later
 
@@ -45,8 +46,8 @@ while (time.time() - start_time < 270): # 4.5 mins
 
     current_time = time.time()
     dt = current_time - last_time
-    correction = pid.correction_calc(error, dt)
     last_time = current_time
+    correction = pid.correction_calc(error, dt)
     #Time keeping to calculate dt and correction
 
     # Adjust motor speeds
@@ -55,6 +56,7 @@ while (time.time() - start_time < 270): # 4.5 mins
     motor_right.speed_change(speed = right_speed, direction = 0)
     #Please note that if motors are placed in a mirrored configuration, their direction of rotation will need to be opposite to drive the same way
     time.sleep(0.05)
+
 
 # If 270 seconds reached
 # Write code to return vehicle back to initial position
