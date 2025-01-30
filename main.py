@@ -14,7 +14,7 @@ start_time = time.time()
 # Initialize PID
 
 # Main control loop
-base_speed = 20  # Base speed of the robot
+base_speed = 10  # Base speed of the robot
 motor_left.speed_change(speed = base_speed, direction = 0)
 motor_right.speed_change(speed = base_speed, direction = 1)
 
@@ -32,8 +32,8 @@ while (time.time() - start_time < 5): # 4.5 mins
 
 
 # Adjust motor speeds
-motor_left.speed_change(speed = 10, direction = 0)
-motor_right.speed_change(speed = 10, direction = 0)
+motor_left.speed_change(speed = 5, direction = 0)
+motor_right.speed_change(speed = 5, direction = 0)
 #Please note that if motors are placed in a mirrored configuration, their direction of rotation will need to be opposite to drive the same way
 
 

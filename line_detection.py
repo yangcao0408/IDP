@@ -4,12 +4,14 @@ import threading
 from motor import *
 from PID_control import *
 
-p_ll = Pin(1, Pin.In) # Input pin for left most sensor
-p_l = Pin(2, Pin.In) # Input pin for left sensor
-p_r = Pin(3, Pin.In) # Input pin for right sensor
-p_rr = Pin(4, Pin.In) # Input pin for right most sensor
+p_ll = Pin(8, Pin.IN) # Input pin for left most sensor
+p_l = Pin(9, Pin.IN) # Input pin for left sensor
+p_r = Pin(10, Pin.IN) # Input pin for right sensor
+p_rr = Pin(11, Pin.IN) # Input pin for right most sensor
 
-light = Pin(5, Pin.Out) # Output pin for light
+light = Pin(5, Pin.OUT) # Output pin for light
+
+button = Pin(6, Pin.IN, Pin.PULL_DOWN) # Input pin for button
 
 def blinking(flag):
     if flag == True: # If vehicle leaves the box

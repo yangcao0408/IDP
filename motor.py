@@ -22,5 +22,5 @@ class Motor_right:
  def off(self):
     self.pwm2.duty_u16(0)
  def speed_change(self, speed, direction):
-    self.pwm1.duty_u16(int(65535*speed/100))
+    self.pwm2.duty_u16(int(65535*speed/100))
     self.m2Dir.value(direction)
