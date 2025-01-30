@@ -3,7 +3,20 @@ import time
 import threading
 from motor import *
 from PID_control import *
+import sys
 
+button = machine.Pin(14, machine.Pin.IN, machine.Pin.PULL_DOWN)
+
+#This pauses the script until the button is pressed
+while button.value() == 0:
+    pass
+
+def button_pressed_restart script():
+    sys.exit()
+    exec(open("main.py").read())
+
+button.irq(trigger=machine.Pin.IRQ_RISING, handler=button_pressed)
+#From then on, when the button is pressed the script will be restarted (button wll have to be repressed)
 
 motor_left = Motor_left()
 motor_right = Motor_right()
