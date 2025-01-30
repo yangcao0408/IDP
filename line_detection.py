@@ -42,11 +42,11 @@ while (time.time() - start_time < 270): # 4.5 mins
     sensor_value = [p_ll.value(), p_l.value(), p_r.value(), p_rr.value()]
     pid.sensor_values = sensor_value
 
-    error = pid.calculate_error()
+    error = pid.error_calc()
 
     current_time = time.time()
     dt = current_time - last_time
-    correction = pid.compute(error, dt)
+    correction = pid.correction_calc(error, dt)
     last_time = current_time
     #Time keeping to calculate dt and correction
 
