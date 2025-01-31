@@ -32,19 +32,28 @@ class PIDController:
         #Negative correction implies turn left
         return (self.Kp * error + self.Ki * self.integral + self.Kd * derivative)
 
-    def motor_speed(self, base_speed, correction): #works as forward turn?
+    def motor_speed(self, base_speed, correction):
         #This function takes a base_speed and the correction from correct_calc to determine the desired motor speed
         left_speed = base_speed + correction
         right_speed = base_speed - correction
+        
+        if left_speed > 0:
+            left_dir = 0
+        elif left_speed < 0:
+            left_dir = 1
+            left_speed = -1 * left_speed
+
+        if right_speed > 0:
+            right_dir = 0   
+        elif right_speed < 0:
+            right_dir = 1
+            right_speed = -1 * right_speed
 
         #left_speed and right_speed should never return negative
 
-        left_speed = max(0, min(100, left_speed))  # Assuming motor speed range is 0-100
-        right_speed = max(0, min(100, right_speed))
+        return left_speed, right_speed, left_dir, right_dir
 
-        return left_speed, right_speed
-
-    def turn_left_90():
+    def turn_left_90(self):
         motor_left = Motor_left()
         motor_right = Motor_right()
                 
@@ -56,7 +65,7 @@ class PIDController:
         time.sleep(000)
         #calibrate how long this turns for
 
-    def turn_right_90():
+    def turn_right_90(self):
         motor_left = Motor_left()
         motor_right = Motor_right()
                 

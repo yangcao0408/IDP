@@ -3,10 +3,10 @@ import time
 from motor import *
 from PID_control import *
 
-p_ll = Pin(8, Pin.IN) # Input pin for left most sensor
-p_l = Pin(9, Pin.IN) # Input pin for left sensor
-p_r = Pin(10, Pin.IN) # Input pin for right sensor
-p_rr = Pin(11, Pin.IN) # Input pin for right most sensor
+p_rr = Pin(8, Pin.IN) # Input pin for left most sensor
+p_r = Pin(9, Pin.IN) # Input pin for left sensor
+p_l = Pin(10, Pin.IN) # Input pin for right sensor
+p_ll = Pin(11, Pin.IN) # Input pin for right most sensor
 
 light = Pin(12, Pin.OUT) # Output pin for light
 
@@ -24,12 +24,12 @@ motor_right = Motor_right()
 start_time = time.ticks_ms()
 
 # Initialize PID
-pid = PIDController(Kp=2.0, Ki=0.3, Kd=0.2)
+pid = PIDController(Kp=0.1, Ki=0.3, Kd=0.3)
 
 # Main control loop
 base_speed = 60
 last_time = time.ticks_ms()
-#time.sleep(0.05)
+time.sleep(0.01)
 
 #flag = True # Remove this later
 
@@ -47,15 +47,15 @@ while (time.ticks_ms() - start_time < 270000): # 4.5 mins
     current_time = time.ticks_ms()
     dt = current_time - last_time
     last_time = current_time
-    correction = pid.correction_calc(error, dt)*1.5
+    correction = pid.correction_calc(error, dt)
     #Time keeping to calculate dt and correction
 
     # Adjust motor speeds
-    left_speed, right_speed = pid.motor_speed(base_speed, correction)
-    motor_left.speed_change(speed = left_speed, direction = 0)
-    motor_right.speed_change(speed = right_speed, direction = 0)
+    left_speed, right_speed, left_dir, right_dir = pid.motor_speed(base_speed, correction)
+    motor_left.speed_change(speed = left_speed, direction = left_dir)
+    motor_right.speed_change(speed = right_speed, direction = right_dir)
     #Please note that if motors are placed in a mirrored configuration, their direction of rotation will need to be opposite to drive the same way
-    #time.sleep(0.05)
+    time.sleep(0.01)
 
 
 # If 270 seconds reached
