@@ -44,9 +44,9 @@ class PIDController:
             left_speed = -1 * left_speed
 
         if right_speed > 0:
-            right_dir = 0   
+            right_dir = 1   
         elif right_speed < 0:
-            right_dir = 1
+            right_dir = 0
             right_speed = -1 * right_speed
 
         #left_speed and right_speed should never return negative
