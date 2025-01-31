@@ -2,8 +2,8 @@ from machine import Pin, PWM
 
 class Motor_left:
  def __init__(self):
-    self.m1Dir = Pin(3 , Pin.OUT) # set pin left wheel
-    self.pwm1 = PWM(Pin(2))
+    self.m1Dir = Pin(4 , Pin.OUT) # set pin left wheel
+    self.pwm1 = PWM(Pin(5))
     self.pwm1.freq(1000)
     self.pwm1.duty_u16(0)
  def off(self):

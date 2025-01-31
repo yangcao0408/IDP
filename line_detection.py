@@ -8,7 +8,7 @@ p_l = Pin(9, Pin.IN) # Input pin for left sensor
 p_r = Pin(10, Pin.IN) # Input pin for right sensor
 p_rr = Pin(11, Pin.IN) # Input pin for right most sensor
 
-light = Pin(5, Pin.OUT) # Output pin for light
+light = Pin(12, Pin.OUT) # Output pin for light
 
 #button = Pin(6, Pin.IN, Pin.PULL_DOWN) # Input pin for button
 
@@ -21,20 +21,20 @@ motor_left = Motor_left()
 motor_right = Motor_right()
 
 
-start_time = time.time()
+start_time = time.ticks_ms()
 
 # Initialize PID
-pid = PIDController(Kp=1.0, Ki=0.1, Kd=0.05)
+pid = PIDController(Kp=2.0, Ki=0.3, Kd=0.2)
 
 # Main control loop
-base_speed = 30  # Base speed of the robot
-last_time = time.time()
-time.sleep(0.05)
+base_speed = 60
+last_time = time.ticks_ms()
+#time.sleep(0.05)
 
 #flag = True # Remove this later
 
 #Put a timer of 4.5 mins
-while (time.time() - start_time < 270): # 4.5 mins
+while (time.ticks_ms() - start_time < 270000): # 4.5 mins
     
     # Lighting
     #threading.Timer(0, blinking(flag)).start() # need to set flag when vehicle leaves box
@@ -44,10 +44,10 @@ while (time.time() - start_time < 270): # 4.5 mins
 
     error = pid.error_calc()
 
-    current_time = time.time()
+    current_time = time.ticks_ms()
     dt = current_time - last_time
     last_time = current_time
-    correction = pid.correction_calc(error, dt)
+    correction = pid.correction_calc(error, dt)*1.5
     #Time keeping to calculate dt and correction
 
     # Adjust motor speeds
@@ -55,7 +55,7 @@ while (time.time() - start_time < 270): # 4.5 mins
     motor_left.speed_change(speed = left_speed, direction = 0)
     motor_right.speed_change(speed = right_speed, direction = 0)
     #Please note that if motors are placed in a mirrored configuration, their direction of rotation will need to be opposite to drive the same way
-    time.sleep(0.05)
+    #time.sleep(0.05)
 
 
 # If 270 seconds reached
