@@ -37,21 +37,20 @@ class PIDController:
         left_speed = base_speed + correction
         right_speed = base_speed - correction
         
+        left_speed_abs = abs(left_speed)
+        right_speed_abs = abs(right_speed)
+
         if left_speed > 0:
             left_dir = 0
         elif left_speed < 0:
             left_dir = 1
-            left_speed = -1 * left_speed
 
         if right_speed > 0:
-            right_dir = 1   
-        elif right_speed < 0:
             right_dir = 0
-            right_speed = -1 * right_speed
+        elif right_speed < 0:
+            right_dir = 1
 
-        #left_speed and right_speed should never return negative
-
-        return left_speed, right_speed, left_dir, right_dir
+        return left_speed_abs, right_speed_abs, left_dir, right_dir
 
     def turn_left_90(self):
         motor_left = Motor_left()
