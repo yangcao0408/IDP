@@ -1,4 +1,5 @@
 from machine import Pin
+from machine import reset
 import time
 from motor import *
 from PID_control import *
@@ -12,14 +13,23 @@ light = Pin(12, Pin.OUT) # Output pin for light
 
 button = Pin(28, Pin.IN, Pin.PULL_DOWN) # Input pin for button
 
-#def blinking(flag):
-    #if flag == True: # If vehicle leaves the box
-        #light.value(not light.value())
-        #time.sleep(0.5)
+button_flag = 0
+
+def button_pressed:
+    global button_flag
+    if button_flag == 0:
+        button_flag = 1
+    elif button_flag == 1:
+        reset()
+
+button.irq(trigger=Pin.IRQ_RISING, handler=button_pressed)
+
+#Button stalling code:
+while button_flag == 0:
+    pass
 
 motor_left = Motor_left()
 motor_right = Motor_right()
-
 
 start_time = time.ticks_ms()
 
@@ -30,13 +40,6 @@ pid = PIDController(Kp=4.0, Ki=0.01, Kd=4.0)
 base_speed = 60
 last_time = time.ticks_ms()
 time.sleep(0.001)
-
-flag = False # Remove this later
-while flag == False:
-    #print(button)
-    if button.value() == 1:
-        flag = True
-        print("button pressed")
 
 
 
