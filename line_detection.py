@@ -24,12 +24,12 @@ motor_right = Motor_right()
 start_time = time.ticks_ms()
 
 # Initialize PID
-pid = PIDController(Kp=2.0, Ki=0.001, Kd=2.0)
+pid = PIDController(Kp=2.0, Ki=0.001, Kd=5.0)
 
 # Main control loop
 base_speed = 60
 last_time = time.ticks_ms()
-time.sleep(0.01)
+time.sleep(0.001)
 
 #flag = True # Remove this later
 
@@ -55,7 +55,7 @@ while (time.ticks_ms() - start_time < 270000): # 4.5 mins
     motor_left.speed_change(speed = left_speed, direction = left_dir)
     motor_right.speed_change(speed = right_speed, direction = right_dir)
     #Please note that if motors are placed in a mirrored configuration, their direction of rotation will need to be opposite to drive the same way
-    time.sleep(0.01)
+    time.sleep(0.001)
 
 
 # If 270 seconds reached

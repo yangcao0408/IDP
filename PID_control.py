@@ -15,9 +15,6 @@ class PIDController:
         #This function takes in a list of binary sensor values and outputs the error value of the system
         weights = [-3, -1, 1, 3]
         #This assigns the weight of each sensor, ideal is therefore zero, while negative requires left turn, positive requires right
-        if len(self.sensor_values) != 4:
-            return 55
-        #55 here behaves as an error code, if we are not reading 4 sensor values
         weighted_sum = sum(weight * value for weight, value in zip(weights, self.sensor_values))
         #Negative error implies turn left
         return weighted_sum
@@ -56,22 +53,23 @@ class PIDController:
         motor_left = Motor_left()
         motor_right = Motor_right()
                 
-        motor_left.speed_change(speed = 40, direction = 0)
-        motor_right.speed_change(speed = 40, direction = 1)
+        motor_left.speed_change(speed = 70, direction = 1)
+        motor_right.speed_change(speed = 70, direction = 0)
         #The speed change should be calibrated here for best turning, also the direction will need to be checked based on motor mirroring
         #The ratio of speeds between forwards and backwards must not necessarily be 1:1, do testing
 
-        time.sleep(000)
+        time.sleep(1.2)
         #calibrate how long this turns for
 
     def turn_right_90(self):
         motor_left = Motor_left()
         motor_right = Motor_right()
                 
-        motor_left.speed_change(speed = 000, direction = 1)
-        motor_right.speed_change(speed = 000, direction = 0)
+        motor_left.speed_change(speed = 40, direction = 0)
+        motor_right.speed_change(speed = 40, direction = 1)
         #The speed change should be calibrated here for best turning, also the direction will need to be checked based on motor mirroring
         #The ratio of speeds between forwards and backwards must not necessarily be 1:1, do testing
 
-        time.sleep(000)
+        time.sleep(0.2)
         #calibrate how long this turns for
+
