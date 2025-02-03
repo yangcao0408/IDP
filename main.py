@@ -27,7 +27,7 @@ start_time = time.ticks_ms()
 pid = PIDController(Kp=4.0, Ki=0.01, Kd=4.0)
 
 # Main control loop
-base_speed = 60
+base_speed = 70
 last_time = time.ticks_ms()
 time.sleep(0.001)
 
@@ -56,6 +56,10 @@ while (time.ticks_ms() - start_time < 270000): # 4.5 mins
     last_time = current_time
     correction = pid.correction_calc(error, dt)
     #Time keeping to calculate dt and correction
+
+    if sensor_value == [1, 1, 1, 1]:
+        time.sleep(0.6)
+        pid.turn_left_90()
 
     # Adjust motor speeds
     left_speed, right_speed, left_dir, right_dir = pid.motor_speed(base_speed, correction)
