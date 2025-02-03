@@ -56,8 +56,8 @@ class PIDController:
         motor_left = Motor_left()
         motor_right = Motor_right()
                 
-        motor_left.speed_change(speed = 000, direction = 0)
-        motor_right.speed_change(speed = 000, direction = 1)
+        motor_left.speed_change(speed = 40, direction = 0)
+        motor_right.speed_change(speed = 40, direction = 1)
         #The speed change should be calibrated here for best turning, also the direction will need to be checked based on motor mirroring
         #The ratio of speeds between forwards and backwards must not necessarily be 1:1, do testing
 

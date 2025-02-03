@@ -24,7 +24,7 @@ motor_right = Motor_right()
 start_time = time.ticks_ms()
 
 # Initialize PID
-pid = PIDController(Kp=2.0, Ki=0.0, Kd=0.0)
+pid = PIDController(Kp=2.0, Ki=0.001, Kd=2.0)
 
 # Main control loop
 base_speed = 60
