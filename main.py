@@ -3,6 +3,7 @@ from machine import reset
 import time
 from motor import *
 from PID_control import *
+from path import *
 
 p_rr = Pin(8, Pin.IN) # Input pin for left most sensor
 p_r = Pin(9, Pin.IN) # Input pin for left sensor
@@ -15,18 +16,16 @@ button = Pin(28, Pin.IN, Pin.PULL_DOWN) # Input pin for button
 
 button_flag = 0
 
-def button_pressed:
+def button_pressed(button):
     global button_flag
     if button_flag == 0:
         button_flag = 1
-    elif button_flag == 1:
-        reset()
 
 button.irq(trigger=Pin.IRQ_RISING, handler=button_pressed)
 
 #Button stalling code:
 while button_flag == 0:
-    pass
+    time.sleep(0.1)
 
 motor_left = Motor_left()
 motor_right = Motor_right()
@@ -60,9 +59,7 @@ while (time.ticks_ms() - start_time < 270000): # 4.5 mins
     correction = pid.correction_calc(error, dt)
     #Time keeping to calculate dt and correction
 
-    if sensor_value == [1, 1, 1, 1]:
-        time.sleep(0.6)
-        pid.turn_left_90()
+    path1(pid, True)
 
     # Adjust motor speeds
     left_speed, right_speed, left_dir, right_dir = pid.motor_speed(base_speed, correction)
