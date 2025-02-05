@@ -80,3 +80,10 @@ class PIDController:
         p_ll = Pin(11, Pin.IN) # Input pin for right most sensor
 
         self.sensor_values = [p_ll.value(), p_l.value(), p_r.value(), p_rr.value()]
+
+    def turn_180(self):
+        motor_left = Motor_left()
+        motor_right = Motor_right()
+                
+        motor_left.speed_change(speed = 70, direction = 0)
+        motor_right.speed_change(speed = 70, direction = 1)

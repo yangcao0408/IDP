@@ -20,5 +20,3 @@ def fall(piston_speed, piston_dir):
     time.sleep(4)
     piston_speed.value(0)
 
-
-

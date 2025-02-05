@@ -27,6 +27,7 @@ def path1(pid, motor_left, motor_right):
 
 def path1_return(pid, motor_left, motor_right):
     # Returning path
+    pid.turn_180()
     # Vehicle is parallel to the destination, facing outwards
     followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 70)
     followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 70)
@@ -45,6 +46,7 @@ def path2(pid, motor_left, motor_right):
 
 def path2_return(pid, motor_left, motor_right):
     # Returning Path
+    pid.turn_180()
     # Vehicle is parallel to the destination, facing outwards
     followline_until(pid, "t_junction", "turn_left", motor_left, motor_right, 70)
     followline_until(pid, "right_junction", "forward", motor_left, motor_right, 70)
@@ -64,6 +66,7 @@ def path3(pid, motor_left, motor_right):
 
 def path3_return(pid, motor_left, motor_right):
     # Returning path
+    pid.turn_180()
     # Vehicle is parallel to the destination, facing outwards
     followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 70)
     followline_until(pid, "right_junction", "turn_right", motor_left, motor_right, 70)
@@ -84,6 +87,7 @@ def path4(pid, motor_left, motor_right):
 
 def path4_return(pid, motor_left, motor_right):
     # Returning path
+    pid.turn_180()
     # Vehicle is parallel to the destination, facing outwards
     followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 70)
     followline_until(pid, "t_junction", "turn_left", motor_left, motor_right, 70)
@@ -101,6 +105,8 @@ def back(pid, motor_left, motor_right):
     followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 70)
 
 def back_centre(pid, motor_left, motor_right, blinking_flag):
+    # Assuming vehicle facing blocks
+    pid.turn_180()
     followline_until(pid, "t_junction", "forward", motor_left, motor_right, 70)
     blinking_flag = False
     return blinking_flag
