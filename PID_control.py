@@ -74,10 +74,10 @@ class PIDController:
         #calibrate how long this turns for
 
     def detect_sensor(self):
-        p_rr = Pin(8, Pin.IN) # Input pin for left most sensor
-        p_r = Pin(9, Pin.IN) # Input pin for left sensor
-        p_l = Pin(10, Pin.IN) # Input pin for right sensor
-        p_ll = Pin(11, Pin.IN) # Input pin for right most sensor
+        p_ll = Pin(8, Pin.IN) # Input pin for left most sensor
+        p_l = Pin(9, Pin.IN) # Input pin for left sensor
+        p_r = Pin(10, Pin.IN) # Input pin for right sensor
+        p_rr = Pin(11, Pin.IN) # Input pin for right most sensor
 
         self.sensor_values = [p_ll.value(), p_l.value(), p_r.value(), p_rr.value()]
 

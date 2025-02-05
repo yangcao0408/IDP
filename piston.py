@@ -1,7 +1,7 @@
 from machine import Pin, PWM
 from time import *
 
-piston_speed = Pin(0, Pin.OUT)
+piston_speed = PWM(Pin(0))
 piston_dir = Pin(1, Pin.OUT)
 
 def rise(piston_speed, piston_dir):
