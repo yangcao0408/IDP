@@ -39,3 +39,6 @@ def followline_until(pid, trigger, action, motor_left, motor_right, base_speed):
     # Reinitialise
     motor_left.speed_change(speed = 0, direction = 0)
     motor_right.speed_change(speed = 0, direction = 0)
+
+def load():
+  #go forth according to lifting
