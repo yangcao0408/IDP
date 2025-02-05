@@ -1,11 +1,10 @@
 from pathblocks import *
 
 # Leaves centre box
-def leave_centre(pid, motor_left, motor_right, blinking_flag):
+def leave_centre(pid, motor_left, motor_right, light):
     # Leave centre box first
     followline_until(pid, "tjunction", "forward", motor_left, motor_right, 70)
-    blinking_flag = True
-    return blinking_flag
+    light.value(1)
 
 
     
@@ -104,10 +103,9 @@ def back(pid, motor_left, motor_right):
     followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 70)
     followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 70)
 
-def back_centre(pid, motor_left, motor_right, blinking_flag):
+def back_centre(pid, motor_left, motor_right, light):
     # Assuming vehicle facing blocks
     pid.turn_180()
     followline_until(pid, "t_junction", "forward", motor_left, motor_right, 70)
-    blinking_flag = False
-    return blinking_flag
+    light.value(0)
     # Stop vehicle
