@@ -4,12 +4,12 @@ import time
 from motor import *
 from PID_control import *
 
-def followline_until(trigger, action):
-  if trigger == left_junct:
+def followline_until(pid, trigger, action, p_ll, p_l, p_r, p_rr, ,motor_left, motor_right, base_speed):
+  if trigger == "left_junct":
     trigger_value = lambda: pid.sensor_values[0] * pid.sensor_values[1] * (1 - pid.sensor_values[3])
-  elif trigger == right_junct:
+  elif trigger == "right_junct":
     trigger_value = lambda: (1 - pid.sensor_values[0]) * pid.sensor_values[2] * pid.sensor_values[3])
-  elif trigger == t_junct:
+  elif trigger == "t_junct":
     trigger_value = lambda: pid.sensor_values[0] * pid.sensor_values[3]
   #trigger_value has value 1 when it is activated
 
@@ -29,11 +29,11 @@ def followline_until(trigger, action):
     motor_right.speed_change(speed = right_speed, direction = right_dir)
     time.sleep(0.001)
 
-  if action == turn_left:
+  if action == "turn_left":
     pid.turn_left_90()
-  elif action == turn_right:
+  elif action == "turn_right":
     pid.turn_right_90()
-  elif action == forward:
+  elif action == "forward":
     motor_left.speed_change(speed = 70, direction = 0)
     motor_right.speed_change(speed = 70, direction = 0)
     time.sleep(0.5)
