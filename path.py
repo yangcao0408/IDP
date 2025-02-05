@@ -1,97 +1,107 @@
 from pathblocks import *
 
 # Leaves centre box
-def leave_centre(pid, p_ll, p_l, p_r, p_rr, motor_left, motor_right, base_speed = 70):
+def leave_centre(pid, motor_left, motor_right, blinking_flag):
     # Leave centre box first
-    followline_until(pid, "tjunction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
+    followline_until(pid, "tjunction", "forward", motor_left, motor_right, 70)
+    blinking_flag = True
+    return blinking_flag
+
+
+    
+def go_to_collection(pid, motor_left, motor_right):    
     # Goes to right collection area
-    followline_until(pid, "tjunction", "turn_right", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "tjunction", "turn_right", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
+    followline_until(pid, "tjunction", "turn_right", motor_left, motor_right, 70)
+    followline_until(pid, "tjunction", "turn_right", motor_left, motor_right, 70)
     # Put collection code here
 
 
 
 # Path 1 Bottom Right
-def path1(pid, p_ll, p_l, p_r, p_rr, motor_left, motor_right, base_speed = 70):
+def path1(pid, motor_left, motor_right):
     # Assuming from right collection area
-    followline_until(pid, "left_junction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "left_junction", "turn_left", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "left_junction", "turn_left", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "forward", motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 70)
     # Put deposit code here, vehicle is facing wall
 
-def path1_return(pid, p_ll, p_l, p_r, p_rr, motor_left, motor_right, base_speed = 70):
+def path1_return(pid, motor_left, motor_right):
     # Returning path
     # Vehicle is parallel to the destination, facing outwards
-    followline_until(pid, "t_junction", "turn_right", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "t_junction", "turn_right", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "right_junction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 70)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 70)
+    followline_until(pid, "right_junction", "forward", motor_left, motor_right, 70)
     # Put collection code here
 
     
 
 # Path 2 Bottom Left
-def path2(pid, p_ll, p_l, p_r, p_rr, motor_left, motor_right, base_speed = 70):
+def path2(pid, motor_left, motor_right):
     # Assuming from right collection area
-    followline_until(pid, "left_junction", "turn_left", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "left_junction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "right_junction", "turn_right", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "forward", motor_left, motor_right, 70)
+    followline_until(pid, "right_junction", "turn_right", motor_left, motor_right, 70)
     # Put deposit code here, vehicle is facing wall
 
-def path2_return(pid, p_ll, p_l, p_r, p_rr, motor_left, motor_right, base_speed = 70):
+def path2_return(pid, motor_left, motor_right):
     # Returning Path
     # Vehicle is parallel to the destination, facing outwards
-    followline_until(pid, "t_junction", "turn_left", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "right_junction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "t_junction", "turn_right", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
+    followline_until(pid, "t_junction", "turn_left", motor_left, motor_right, 70)
+    followline_until(pid, "right_junction", "forward", motor_left, motor_right, 70)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 70)
 
     # Put collection code here
 
 
 # Path 3 Top Right
-def path3(pid, p_ll, p_l, p_r, p_rr, motor_left, motor_right, base_speed = 70):
+def path3(pid, motor_left, motor_right):
     # Assuming from right collection area
-    followline_until(pid, "left_junction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "left_junction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "left_junction", "turn_left", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "left_junction", "turn_left", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)\
+    followline_until(pid, "left_junction", "forward", motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "forward", motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 70)\
     # Put deposit code here, vehicle is facing wall
 
-def path3_return(pid, p_ll, p_l, p_r, p_rr, motor_left, motor_right, base_speed = 70):
+def path3_return(pid, motor_left, motor_right):
     # Returning path
     # Vehicle is parallel to the destination, facing outwards
-    followline_until(pid, "t_junction", "turn_right", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "right_junction", "turn_right", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "right_junction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "right_junction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 70)
+    followline_until(pid, "right_junction", "turn_right", motor_left, motor_right, 70)
+    followline_until(pid, "right_junction", "forward", motor_left, motor_right, 70)
+    followline_until(pid, "right_junction", "forward", motor_left, motor_right, 70)
     # Put collection code here
 
 
 # Path 4 Top Left
-def path4(pid, p_ll, p_l, p_r, p_rr, motor_left, motor_right, base_speed = 70):
+def path4(pid, motor_left, motor_right):
     # Assuming from right collection area
-    followline_until(pid, "left_junction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "left_junction", "turn_left", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "left_junction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "right_junction", "turn_right", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "left_junction", "turn_left", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "forward", motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "forward", motor_left, motor_right, 70)
+    followline_until(pid, "right_junction", "turn_right", motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 70)
     # Put deposit code here, vehicle is facing wall
 
-def path4_return(pid, p_ll, p_l, p_r, p_rr, motor_left, motor_right, base_speed = 70):
+def path4_return(pid, motor_left, motor_right):
     # Returning path
     # Vehicle is parallel to the destination, facing outwards
-    followline_until(pid, "t_junction", "turn_right", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "t_junction", "turn_left", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "right_junction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "t_junction", "turn_right", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "right_junction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 70)
+    followline_until(pid, "t_junction", "turn_left", motor_left, motor_right, 70)
+    followline_until(pid, "right_junction", "forward", motor_left, motor_right, 70)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 70)
+    followline_until(pid, "right_junction", "forward", motor_left, motor_right, 70)
     # Put collection code here
 
 
 # Returning to starting point when insufficient time
-def back(pid, p_ll, p_l, p_r, p_rr, motor_left, motor_right, base_speed = 70):
+def back(pid, motor_left, motor_right):
     # Assuming at collection area, facing collecting area
     # Reverse vehicle direction
-    followline_until(pid, "left_junction", "turn_left", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "left_junction", "turn_left", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
-    followline_until(pid, "t_junction", "forward", p_ll, p_l, p_r, p_rr, motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 70)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 70)
+
+def back_centre(pid, motor_left, motor_right, blinking_flag):
+    followline_until(pid, "t_junction", "forward", motor_left, motor_right, 70)
+    blinking_flag = False
+    return blinking_flag
     # Stop vehicle

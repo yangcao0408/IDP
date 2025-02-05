@@ -4,7 +4,7 @@ import time
 from motor import *
 from PID_control import *
 
-def followline_until(pid, trigger, action, p_ll, p_l, p_r, p_rr, motor_left, motor_right, base_speed):
+def followline_until(pid, trigger, action, motor_left, motor_right, base_speed):
   if trigger == "left_junction":
     trigger_value = lambda: pid.sensor_values[0] * pid.sensor_values[1] * (1 - pid.sensor_values[3])
   elif trigger == "right_junction":
@@ -14,8 +14,7 @@ def followline_until(pid, trigger, action, p_ll, p_l, p_r, p_rr, motor_left, mot
   #trigger_value has value 1 when it is activated
 
   while trigger_value != 1:
-    sensor_value = [p_ll.value(), p_l.value(), p_r.value(), p_rr.value()]
-    pid.sensor_values = sensor_value
+    pid.detect_sensor()
 
     error = pid.error_calc()
 

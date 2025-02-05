@@ -5,11 +5,6 @@ from motor import *
 from PID_control import *
 from path import *
 
-p_rr = Pin(8, Pin.IN) # Input pin for left most sensor
-p_r = Pin(9, Pin.IN) # Input pin for left sensor
-p_l = Pin(10, Pin.IN) # Input pin for right sensor
-p_ll = Pin(11, Pin.IN) # Input pin for right most sensor
-
 light = Pin(12, Pin.OUT) # Output pin for light
 
 button = Pin(28, Pin.IN, Pin.PULL_DOWN) # Input pin for button
@@ -48,8 +43,7 @@ while (time.ticks_ms() - start_time < 270000): # 4.5 mins
     # Lighting
     #threading.Timer(0, blinking(flag)).start() # need to set flag when vehicle leaves box
     # Main loop here, with control theory
-    sensor_value = [p_ll.value(), p_l.value(), p_r.value(), p_rr.value()]
-    pid.sensor_values = sensor_value
+    pid.detect_sensor()
 
     error = pid.error_calc()
 
