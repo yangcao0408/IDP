@@ -5,8 +5,6 @@ from motor import *
 from PID_control import *
 from path import *
 
-light = Pin(12, Pin.OUT) # Output pin for light
-
 button = Pin(28, Pin.IN, Pin.PULL_DOWN) # Input pin for button
 
 button_flag = 0
@@ -28,43 +26,41 @@ motor_right = Motor_right()
 start_time = time.ticks_ms()
 
 # Initialize PID
-pid = PIDController(Kp=4.0, Ki=0.01, Kd=4.0)
+pid = PIDController(Kp=5.0, Ki=0.0, Kd=0.0)
 
 # Main control loop
-base_speed = 70
+base_speed = 90
 last_time = time.ticks_ms()
 time.sleep(0.001)
 
 
 
 #Put a timer of 4.5 mins
-while (time.ticks_ms() - start_time < 270000): # 4.5 mins
-    
-    # Lighting
-    #threading.Timer(0, blinking(flag)).start() # need to set flag when vehicle leaves box
-    # Main loop here, with control theory
-    pid.detect_sensor()
 
-    error = pid.error_calc()
+leave_centre(pid, Motor_left(), Motor_right(), 1)
+go_to_collection(pid, Motor_left(), Motor_right())
+motor_left.speed_change(speed = 90, direction = 0)
+motor_right.speed_change(speed = 90, direction = 0)
+time.sleep(0.5)
+pid.turn_180()
+path1(pid, Motor_left(), Motor_right())
+motor_left.speed_change(speed = 90, direction = 0)
+motor_right.speed_change(speed = 90, direction = 0)
+time.sleep(0.5)
+pid.turn_180()
+path1_return(pid, Motor_left(), Motor_right())
+followline_until(pid, "left_junction", "turn_left", Motor_left(), Motor_right(), 90)
+followline_until(pid, "t_junction", "forward", Motor_left(), Motor_right(), 90)
+time.sleep(1.5)
+motor_left.speed_change(speed = 0, direction = 0)
+motor_right.speed_change(speed = 0, direction = 0)
 
-    current_time = time.ticks_ms()
-    dt = current_time - last_time
-    last_time = current_time
-    correction = pid.correction_calc(error, dt)
-    #Time keeping to calculate dt and correction
 
-    path1(pid, True)
-
-    # Adjust motor speeds
-    left_speed, right_speed, left_dir, right_dir = pid.motor_speed(base_speed, correction)
-    motor_left.speed_change(speed = left_speed, direction = left_dir)
-    motor_right.speed_change(speed = right_speed, direction = right_dir)
-    #Please note that if motors are placed in a mirrored configuration, their direction of rotation will need to be opposite to drive the same way
-    time.sleep(0.001)
 
 
 # If 270 seconds reached
 # Write code to return vehicle back to initial position
+
 
 
 

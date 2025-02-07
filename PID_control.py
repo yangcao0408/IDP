@@ -13,7 +13,7 @@ class PIDController:
 
     def error_calc(self):
         #This function takes in a list of binary sensor values and outputs the error value of the system
-        weights = [-5, -1, 1, 5]
+        weights = [-2, -1, 1, 2]
         #This assigns the weight of each sensor, ideal is therefore zero, while negative requires left turn, positive requires right
         weighted_sum = sum(weight * value for weight, value in zip(weights, self.sensor_values))
         #Negative error implies turn left
@@ -49,29 +49,33 @@ class PIDController:
 
         return left_speed_abs, right_speed_abs, left_dir, right_dir
 
-    def turn_left_90(self):
+    def turn_left_90(self, duration):
         motor_left = Motor_left()
         motor_right = Motor_right()
-                
-        motor_left.speed_change(speed = 0, direction = 0)
+
+        motor_left.speed_change(speed = 50, direction = 1)
         motor_right.speed_change(speed = 70, direction = 0)
         #The speed change should be calibrated here for best turning, also the direction will need to be checked based on motor mirroring
         #The ratio of speeds between forwards and backwards must not necessarily be 1:1, do testing
 
-        time.sleep(2.2)
+        time.sleep(duration)
         #calibrate how long this turns for
+        motor_left.speed_change(speed = 0, direction = 0)
+        motor_right.speed_change(speed = 0, direction = 0)
 
-    def turn_right_90(self):
+    def turn_right_90(self, duration):
         motor_left = Motor_left()
         motor_right = Motor_right()
                 
         motor_left.speed_change(speed = 70, direction = 0)
-        motor_right.speed_change(speed = 0, direction = 0)
+        motor_right.speed_change(speed = 50, direction = 1)
         #The speed change should be calibrated here for best turning, also the direction will need to be checked based on motor mirroring
         #The ratio of speeds between forwards and backwards must not necessarily be 1:1, do testing
 
-        time.sleep(2.2)
+        time.sleep(duration)
         #calibrate how long this turns for
+        motor_left.speed_change(speed = 0, direction = 0)
+        motor_right.speed_change(speed = 0, direction = 0)
 
     def detect_sensor(self):
         p_ll = Pin(8, Pin.IN) # Input pin for left most sensor
@@ -87,3 +91,8 @@ class PIDController:
                 
         motor_left.speed_change(speed = 70, direction = 0)
         motor_right.speed_change(speed = 70, direction = 1)
+
+        time.sleep(2.9)
+
+        motor_left.speed_change(speed = 90, direction = 0)
+        motor_right.speed_change(speed = 90, direction = 0)
