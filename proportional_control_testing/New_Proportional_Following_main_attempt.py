@@ -33,7 +33,7 @@ start_time = time.ticks_ms()
 while (time.ticks_ms() - start_time < 270000): # 4.5 mins
 
     control.detect_sensor()
-    correction = control.correction_calc(error, dt)
+    correction = control.correction_calc()
 
     # Adjust motor speeds
     left_speed, right_speed = control.motor_speed(base_speed, correction)
