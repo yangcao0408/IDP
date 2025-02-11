@@ -1,4 +1,4 @@
-from machine import Pin
+from machine import Pin, I2C
 from machine import reset
 import time
 from motor import *
@@ -6,6 +6,10 @@ from PID_control import *
 from path import *
 
 button = Pin(28, Pin.IN, Pin.PULL_DOWN) # Input pin for button
+sda = Pin()
+scl = Pin() #Set pins
+id = 0
+i2c = I2C(id=id, sda=sda, scl=scl)
 
 button_flag = 0
 

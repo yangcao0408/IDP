@@ -39,6 +39,14 @@ def followline_until(pid, trigger, action, motor_left, motor_right, base_speed, 
     motor_left.speed_change(speed = 90, direction = 0)
     motor_right.speed_change(speed = 90, direction = 0)
     time.sleep(0.5)
+  elif action == "stop":
+    motor_left.speed_change(speed = 0, direction = 0)
+    motor_right.speed_change(speed = 0, direction = 0)
+    time.sleep(4.0)
+  elif action == "reverse":
+    motor_left.speed_change(speed = 70, direction = 1)
+    motor_right.speed_change(speed = 70, direction = 1)
+    time.sleep(0.3)
   # Reinitialise
   motor_left.speed_change(speed = 90, direction = 0)
   motor_right.speed_change(speed = 90, direction = 0)
