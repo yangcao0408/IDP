@@ -78,10 +78,10 @@ class PIDController:
         motor_right.speed_change(speed = 0, direction = 0)
 
     def detect_sensor(self):
-        p_ll = Pin(8, Pin.IN) # Input pin for left most sensor
-        p_l = Pin(9, Pin.IN) # Input pin for left sensor
-        p_r = Pin(10, Pin.IN) # Input pin for right sensor
-        p_rr = Pin(11, Pin.IN) # Input pin for right most sensor
+        p_ll = Pin(10, Pin.IN) # Input pin for left most sensor
+        p_l = Pin(11, Pin.IN) # Input pin for left sensor
+        p_r = Pin(12, Pin.IN) # Input pin for right sensor
+        p_rr = Pin(13, Pin.IN) # Input pin for right most sensor
 
         self.sensor_values = [p_ll.value(), p_l.value(), p_r.value(), p_rr.value()]
 
