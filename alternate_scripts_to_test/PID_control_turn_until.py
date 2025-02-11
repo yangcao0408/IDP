@@ -49,31 +49,79 @@ class PIDController:
 
         return left_speed_abs, right_speed_abs, left_dir, right_dir
 
-    def turn_left_90(self, duration):
+    def turn_pure_bend(self, LorR):
         motor_left = Motor_left()
         motor_right = Motor_right()
+
+        if LoR == right:
+            LoRvalue = 1
+            inverse = 2
+        elif LoR == left:
+            LoRvalue = 2
+            inverse = 1
 
         motor_left.speed_change(speed = 50, direction = 1)
         motor_right.speed_change(speed = 70, direction = 0)
-        #The speed change should be calibrated here for best turning, also the direction will need to be checked based on motor mirroring
-        #The ratio of speeds between forwards and backwards must not necessarily be 1:1, do testing
 
-        time.sleep(duration)
-        #calibrate how long this turns for
+        #This assumes that e.g. for a left turn, Centre R will initially be off, then flick on, then flick off then on again for final position, Centre L should also be off for final position
+
+        while self.sensor_values[LoRvalue] != 1
+            time.sleep(0.0001)
+        while self.sensor_values[LoRvalue] != 0
+            time.sleep(0.0001)
+        while self.sensor_values[LoRvalue] != 1 and self.sensor_values[inverse] != 0
+            time.sleep(0.0001)
+
         motor_left.speed_change(speed = 0, direction = 0)
         motor_right.speed_change(speed = 0, direction = 0)
 
-    def turn_right_90(self, duration):
+    def turn_tjunction(self, LorR):
         motor_left = Motor_left()
         motor_right = Motor_right()
-                
-        motor_left.speed_change(speed = 70, direction = 0)
-        motor_right.speed_change(speed = 50, direction = 1)
-        #The speed change should be calibrated here for best turning, also the direction will need to be checked based on motor mirroring
-        #The ratio of speeds between forwards and backwards must not necessarily be 1:1, do testing
 
-        time.sleep(duration)
-        #calibrate how long this turns for
+        if LoR == right:
+            LoRvalue = 1
+            inverse = 2
+        elif LoR == left:
+            LoRvalue = 2
+            inverse = 1
+
+        motor_left.speed_change(speed = 50, direction = 1)
+        motor_right.speed_change(speed = 70, direction = 0)
+
+        #This assumes that e.g. for a left turn, Centre R will initially be on, flick off, then flick on again for final position and Centre L should be off for final position
+
+        while self.sensor_values[LoRvalue] != 0
+            time.sleep(0.0001)
+        while self.sensor_values[LoRvalue] != 1 and self.sensor_values[inverse] != 0
+            time.sleep(0.0001)
+
+        motor_left.speed_change(speed = 0, direction = 0)
+        motor_right.speed_change(speed = 0, direction = 0)
+
+    def turn_combijunction(self, LorR):
+        motor_left = Motor_left()
+        motor_right = Motor_right()
+
+        if LoR == right:
+            LoRvalue = 1
+            inverse = 2
+        elif LoR == left:
+            LoRvalue = 2
+            inverse = 1
+
+        motor_left.speed_change(speed = 50, direction = 1)
+        motor_right.speed_change(speed = 70, direction = 0)
+
+        #This assumes that e.g. for a left turn, Centre R will initially be off, flick on, flick off, then flick on again for final position and Centre L should be off for final position
+
+        while self.sensor_values[LoRvalue] != 1
+            time.sleep(0.0001)
+        while self.sensor_values[LoRvalue] != 0
+            time.sleep(0.0001)
+        while self.sensor_values[LoRvalue] != 1 and self.sensor_values[inverse] != 0
+            time.sleep(0.0001)
+
         motor_left.speed_change(speed = 0, direction = 0)
         motor_right.speed_change(speed = 0, direction = 0)
 
