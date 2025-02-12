@@ -54,22 +54,19 @@ class PIDController:
         motor_right = Motor_right()
 
         if LoR == right:
-            LoRvalue = 1
-            inverse = 2
+            LoRvalue = 3
         elif LoR == left:
-            LoRvalue = 2
-            inverse = 1
+            LoRvalue = 0
 
         motor_left.speed_change(speed = 50, direction = 1)
         motor_right.speed_change(speed = 70, direction = 0)
 
-        #This assumes that e.g. for a left turn, Centre R will initially be off, then flick on, then flick off then on again for final position, Centre L should also be off for final position
-
+        time.sleep(0.2)
+        #Sleep to allow for some movement before to avoid sensor tripping from initial state
+        
+        #This assumes that e.g. for a left turn, LL will be off until the final position where it flicks on
+        #PLEASE NOTE: All turning methods use the same sensor parameters, this is the simplest way and may or may not work, adjust while testing
         while self.sensor_values[LoRvalue] != 1
-            time.sleep(0.0001)
-        while self.sensor_values[LoRvalue] != 0
-            time.sleep(0.0001)
-        while self.sensor_values[LoRvalue] != 1 and self.sensor_values[inverse] != 0
             time.sleep(0.0001)
 
         motor_left.speed_change(speed = 0, direction = 0)
@@ -80,20 +77,19 @@ class PIDController:
         motor_right = Motor_right()
 
         if LoR == right:
-            LoRvalue = 1
-            inverse = 2
+            LoRvalue = 3
         elif LoR == left:
-            LoRvalue = 2
-            inverse = 1
+            LoRvalue = 0
 
         motor_left.speed_change(speed = 50, direction = 1)
         motor_right.speed_change(speed = 70, direction = 0)
 
-        #This assumes that e.g. for a left turn, Centre R will initially be on, flick off, then flick on again for final position and Centre L should be off for final position
-
-        while self.sensor_values[LoRvalue] != 0
-            time.sleep(0.0001)
-        while self.sensor_values[LoRvalue] != 1 and self.sensor_values[inverse] != 0
+        time.sleep(0.2)
+        #Sleep to allow for some movement before to avoid sensor tripping from initial state
+        
+        #This assumes that e.g. for a left turn, LL will be off until the final position where it flicks on
+        #This is the same as purebend
+        while self.sensor_values[LoRvalue] != 1
             time.sleep(0.0001)
 
         motor_left.speed_change(speed = 0, direction = 0)
@@ -104,22 +100,19 @@ class PIDController:
         motor_right = Motor_right()
 
         if LoR == right:
-            LoRvalue = 1
-            inverse = 2
+            LoRvalue = 3
         elif LoR == left:
-            LoRvalue = 2
-            inverse = 1
+            LoRvalue = 0
 
         motor_left.speed_change(speed = 50, direction = 1)
         motor_right.speed_change(speed = 70, direction = 0)
 
-        #This assumes that e.g. for a left turn, Centre R will initially be off, flick on, flick off, then flick on again for final position and Centre L should be off for final position
-
+        time.sleep(0.2)
+        #Sleep to allow for some movement before to avoid sensor tripping from initial state
+        
+        #This assumes that e.g. for a left turn, LL will be off until the final position where it flicks on
+        #This is the same as purebend
         while self.sensor_values[LoRvalue] != 1
-            time.sleep(0.0001)
-        while self.sensor_values[LoRvalue] != 0
-            time.sleep(0.0001)
-        while self.sensor_values[LoRvalue] != 1 and self.sensor_values[inverse] != 0
             time.sleep(0.0001)
 
         motor_left.speed_change(speed = 0, direction = 0)

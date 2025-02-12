@@ -6,8 +6,8 @@ from PID_control import *
 from path import *
 
 button = Pin(28, Pin.IN, Pin.PULL_DOWN) # Input pin for button
-sda = Pin()
-scl = Pin() #Set pins
+sda = Pin(16)
+scl = Pin(17) #Set pins
 id = 0
 i2c = I2C(id=id, sda=sda, scl=scl)
 

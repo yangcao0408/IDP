@@ -35,28 +35,17 @@ def followline_until(pid, trigger, action, motor_left, motor_right, base_speed, 
 
   #After the trigger is detected, whichever action was chosen is then executed
   if action == "turn_left":
-    pid.turn_left_90(duration)
+    pid.turn_pure_bend(self, left)
+    #NOTE: For now this tests all junctions as using the same bending criteria, this may be correct and if so then great but if not then if action == "turn_left" and trigger == "T_Junction" type code must be implemented
   elif action == "turn_right":
-    pid.turn_right_90(duration)
+    pid.turn_pure_bend(self, right)
   elif action == "forward":
     #This action effectively acts as 'ignore', i.e. upon seeing a junction this action will continue driving straight forwards
     motor_left.speed_change(speed = 90, direction = 0)
     motor_right.speed_change(speed = 90, direction = 0)
     time.sleep(0.5)
-<<<<<<< HEAD
-  elif action == "stop":
-    motor_left.speed_change(speed = 0, direction = 0)
-    motor_right.speed_change(speed = 0, direction = 0)
-    time.sleep(4.0)
-  elif action == "reverse":
-    motor_left.speed_change(speed = 70, direction = 1)
-    motor_right.speed_change(speed = 70, direction = 1)
-    time.sleep(0.3)
-  # Reinitialise
-=======
 
   #Reinitialise values
->>>>>>> a30a5ce186b114c156685c9f22aa7cc425f5475c
   motor_left.speed_change(speed = 90, direction = 0)
   motor_right.speed_change(speed = 90, direction = 0)
   pid.sensor_values = [0, 0, 0, 0]
