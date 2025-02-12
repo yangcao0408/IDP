@@ -10,8 +10,8 @@ def leave_centre(pid, motor_left, motor_right, light):
     
 def go_to_collection(pid, motor_left, motor_right):    
     # Goes to right collection area
-    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.75)
-    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.9)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
     # Put collection code here
 
 
@@ -20,15 +20,15 @@ def go_to_collection(pid, motor_left, motor_right):
 def path1(pid, motor_left, motor_right):
     # Assuming from right collection area
     followline_until(pid, "left_junction", "forward", motor_left, motor_right, 90, 0)
-    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 1.55)
-    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 1.55)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 1.9)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 2.0)
     # Put deposit code here, vehicle is facing wall
 
 def path1_return(pid, motor_left, motor_right):
     # Returning path
     # Vehicle is parallel to the destination, facing outwards
-    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 2.0)
-    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 2.1)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
     #########Changed for testing purposes
     #########
     #########

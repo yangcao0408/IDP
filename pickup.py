@@ -16,12 +16,12 @@ def pickup(pid, motor_left, motor_right, base_speed):
         correction = pid.correction_calc(error, dt)
 
         left_speed, right_speed, left_dir, right_dir = pid.motor_speed(base_speed, correction)
-        motor_left.speed_change(speed = left_speed, direction = left_dir)
-        motor_right.speed_change(speed = right_speed, direction = right_dir)
+        motor_left.speed_change(speed = left_speed - 20, direction = left_dir)
+        motor_right.speed_change(speed = right_speed - 20, direction = right_dir)
         time.sleep(0.001)
 
         #Put QR code scanning here
-        QR = QR.sense()
+        QR = QR.scan_for_QR()
         if QR != 0 and scan_trigger == False:
             scan_trigger = True
 

@@ -1,11 +1,9 @@
 from machine import Pin
 from machine import reset
 import time
-from motor import *
-from PID_control import *
-from path import *
-
-light = Pin(12, Pin.OUT) # Output pin for light
+from main.motor import *
+from main.PID_control import *
+from main.path import *
 
 button = Pin(28, Pin.IN, Pin.PULL_DOWN) # Input pin for button
 
@@ -36,9 +34,7 @@ last_time = time.ticks_ms()
 time.sleep(0.001)
 
 
-
-#Put a timer of 4.5 mins
-while (time.ticks_ms() - start_time < 270000): # 4.5 mins
+while (True):
     motor_left.speed_change(speed = 70, direction = 0)
     motor_right.speed_change(speed = 70, direction = 0)
 

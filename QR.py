@@ -21,9 +21,9 @@ TINY_CODE_READER_MESSAGE_FORMAT = "B" * TINY_CODE_READER_MESSAGE_SIZE
 TINY_CODE_READER_I2C_FORMAT = TINY_CODE_READER_LENGTH_FORMAT + TINY_CODE_READER_MESSAGE_FORMAT
 TINY_CODE_READER_I2C_BYTE_COUNT = struct.calcsize(TINY_CODE_READER_I2C_FORMAT)
 
-i2c = machine.I2C(1, scl=machine.Pin(19), sda=machine.Pin(18), freq=400000)
+#i2c = machine.I2C(1, scl=machine.Pin(17), sda=machine.Pin(16), freq=400000)
 
-def scan_for_QR(trytime):
+def scan_for_QR(trytime, i2c):
   #This function scans for a QR code for trytime long and at the end will return the final instance of QR code it was able to scan
   start_time = time.time()
   code = 0

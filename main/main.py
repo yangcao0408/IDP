@@ -5,11 +5,13 @@ from motor import *
 from PID_control import *
 from path import *
 
-button = Pin(28, Pin.IN, Pin.PULL_DOWN) # Input pin for button
+button = Pin(27, Pin.IN, Pin.PULL_DOWN) # Input pin for button
+'''
 sda = Pin(16)
 scl = Pin(17) #Set pins
-id = 0
+id = 1
 i2c = I2C(id=id, sda=sda, scl=scl)
+'''
 
 button_flag = 0
 
@@ -30,7 +32,7 @@ motor_right = Motor_right()
 start_time = time.ticks_ms()
 
 # Initialize PID
-pid = PIDController(Kp=5.0, Ki=0.0, Kd=0.0)
+pid = PIDController(Kp=15.0, Ki=0.0, Kd=0.0)
 
 # Main control loop
 base_speed = 90

@@ -43,7 +43,6 @@ def followline_until(pid, trigger, action, motor_left, motor_right, base_speed, 
     motor_left.speed_change(speed = 90, direction = 0)
     motor_right.speed_change(speed = 90, direction = 0)
     time.sleep(0.5)
-<<<<<<< HEAD
   elif action == "stop":
     motor_left.speed_change(speed = 0, direction = 0)
     motor_right.speed_change(speed = 0, direction = 0)
@@ -53,10 +52,6 @@ def followline_until(pid, trigger, action, motor_left, motor_right, base_speed, 
     motor_right.speed_change(speed = 70, direction = 1)
     time.sleep(0.3)
   # Reinitialise
-=======
-
-  #Reinitialise values
->>>>>>> a30a5ce186b114c156685c9f22aa7cc425f5475c
   motor_left.speed_change(speed = 90, direction = 0)
   motor_right.speed_change(speed = 90, direction = 0)
   pid.sensor_values = [0, 0, 0, 0]

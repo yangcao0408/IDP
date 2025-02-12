@@ -1,22 +1,25 @@
 from machine import Pin, PWM
-from time import *
+import time
 
-piston_speed = PWM(Pin(0))
-piston_dir = Pin(1, Pin.OUT)
+class piston:
+    def __init__(self):
+        self.piston_speed = PWM(Pin(1))
+        self.piston_dir = Pin(0, Pin.OUT)
+        self.piston_speed.freq(1000)  # Set PWM frequency to 1kHz
+        self.piston_speed.duty_u16(0)  # Set PWM duty cycle to 0 to start the motor as off
 
-def rise(piston_speed, piston_dir):
-    piston_dir.value(0)
-    piston_speed.value(100)
+    def rise(self):
+        self.piston_dir.value(0)
+        self.piston_speed.duty_u16(int(65535*100/100))
 
-    #Can still change
-    time.sleep(3)
-    piston_speed.value(0)
+        #Can still change
+        time.sleep(3)
+        self.piston_speed.duty_u16(int(65535*0/100))
 
-def fall(piston_speed, piston_dir):
-    piston_dir.value(1)
-    piston_speed.value(100)
+    def fall(self):
+        self.piston_dir.value(1)
+        self.piston_speed.duty_u16(int(65535*100/100))
 
-    #Can still change
-    time.sleep(3.5)
-    piston_speed.value(0)
-
+        #Can still change
+        time.sleep(3.5)
+        self.piston_speed.duty_u16(int(65535*0/100))
