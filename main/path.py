@@ -2,12 +2,10 @@ from pathblocks import *
 from pickup import *
 
 # Leaves centre box
-def leave_centre(pid, motor_left, motor_right, light):
+def leave_centre(pid, motor_left, motor_right, led):
     # Leave centre box first
     followline_until(pid, "t_junction", "forward", motor_left, motor_right, 90, 0)
-    #light.value(1)
-
-
+    led.value(1)
     
 def go_to_collection(pid, motor_left, motor_right):    
     # Goes to right collection area
