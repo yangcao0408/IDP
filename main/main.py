@@ -39,17 +39,18 @@ pid = PIDController(Kp=15.0)
 # Main control loop
 base_speed = 90
 
-leave_centre(pid, Motor_left(), Motor_right(), led)
-destination = go_to_collection(pid, Motor_left(), Motor_right())
+block_counter = 0
+
+leave_centre_to_collection(pid, Motor_left(), Motor_right(), led)
 
 #Put a timer of 4.5 mins
-while True:
+while time.ticks_ms() < 270000 and block_counter < 4:
+    destination = collection_base_to_inserted(pid, Motor_left(), Motor_right())
     pid.turn_180()
     motor_left.speed_change(speed = 90, direction = 0)
     motor_right.speed_change(speed = 90, direction = 0)
     time.sleep(0.5)
     
-
     if destination == 'A':
         path1(pid, Motor_left(), Motor_right())
         motor_left.speed_change(speed = 90, direction = 0)
@@ -58,6 +59,7 @@ while True:
         dropoff()
         pid.turn_180()
         path1_return(pid, Motor_left(), Motor_right())
+        block_counter += 1
 
     elif destination == 'B':
         path2(pid, Motor_left(), Motor_right())
@@ -67,6 +69,7 @@ while True:
         dropoff()
         pid.turn_180()
         path2_return(pid, Motor_left(), Motor_right())
+        block_counter += 1
 
     elif destination == 'C':
         path3(pid, Motor_left(), Motor_right())
@@ -76,6 +79,7 @@ while True:
         dropoff()
         pid.turn_180()
         path3_return(pid, Motor_left(), Motor_right())
+        block_counter += 1
 
     elif destination == 'D':
         path4(pid, Motor_left(), Motor_right())
@@ -85,6 +89,9 @@ while True:
         dropoff()
         pid.turn_180()
         path4_return(pid, Motor_left(), Motor_right())
+        block_counter += 1
+
+collection_base_to_centre(pid, Motor_left(), Motor_right(), led)
 
 '''
 leave_centre(pid, Motor_left(), Motor_right(), 1)
