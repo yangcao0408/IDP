@@ -9,7 +9,11 @@ def leave_centre_to_collection_base(pid, motor_left, motor_right, led):
     followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
     followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
     #This ends at the collection area
-    
+
+def collection_base_to_centre(pid, motor_left, motor_right, led):
+    #insert stuff here
+    led.value(0)
+
 def collection_base_to_inserted(pid, motor_left, motor_right):    
     destination = pickup_destination(pid, motor_left, motor_right)
     return destination
