@@ -6,6 +6,8 @@ from PID_control import *
 from path import *
 
 button = Pin(27, Pin.IN, Pin.PULL_DOWN) # Input pin for button
+led = Pin(14, Pin.OUT)
+
 '''
 sda = Pin(16)
 scl = Pin(17) #Set pins
