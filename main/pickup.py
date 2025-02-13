@@ -25,11 +25,17 @@ def pickup_destination(pid, motor_left, motor_right, base_speed = 20):
             scan_trigger = True
             destination = QR
 
+            dummy_start = time.time()
+
         if scan_trigger == True:
-            distance = return_range_mm() #adjust distance_finder file
-            #Distance to be determined
-            if distance < 5:
+            #Dummy code whilst ToF is broken
+            if time.time() - dummy start > 2:
                 flag_trigger = True
+            
+            #distance = return_range_mm() #adjust distance_finder file
+            #Distance to be determined
+            #if distance < 5:
+                #flag_trigger = True
                 
     # Assuming forklift is below block
     pist = piston()
