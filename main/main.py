@@ -39,7 +39,7 @@ pid = PIDController(Kp=15.0)
 # Main control loop
 base_speed = 90
 
-leave_centre(pid, Motor_left(), Motor_right(), 1)
+leave_centre(pid, Motor_left(), Motor_right(), led)
 
 #Put a timer of 4.5 mins
 while True:
