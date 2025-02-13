@@ -14,10 +14,6 @@ def collection_base_to_centre(pid, motor_left, motor_right, led):
     #insert stuff here
     led.value(0)
 
-def collection_base_to_inserted(pid, motor_left, motor_right):    
-    destination = pickup_destination(pid, motor_left, motor_right)
-    return destination
-
 
 # Path 1 Bottom Right
 def path1(pid, motor_left, motor_right):

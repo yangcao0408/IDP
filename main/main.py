@@ -41,11 +41,12 @@ base_speed = 90
 
 block_counter = 0
 
-leave_centre_to_collection_base(pid, Motor_left(), Motor_right(), led)
+print("Starting")
+leave_centre_to_collection_base(pid, motor_left, motor_right, led)
 
 #Put a timer of 4.5 mins
-while time.ticks_ms() < 270000 and block_counter < 4:
-    destination = collection_base_to_inserted(pid, Motor_left(), Motor_right())
+while time.ticks_ms() - start_time < 270000 and block_counter < 4:
+    destination = pickup_destination(pid, motor_left, motor_right)
     pid.turn_180()
     motor_left.speed_change(speed = 90, direction = 0)
     motor_right.speed_change(speed = 90, direction = 0)

@@ -1,15 +1,21 @@
 import machine
 import time
-from main.piston import *
+from piston import *
 from QR import *
 from distance_finder import *
 from piston import *
 
-def pickup_destination(pid, motor_left, motor_right, base_speed = 20):
-    flag_trigger = lambda: False
-    scan_trigger = lambda: False
+def pickup_destination(pid, motor_left, motor_right, base_speed = 50):
+    flag_trigger = False
+    scan_trigger = False
+
+    motor_left.speed_change(speed = 50, direction = 0)
+    motor_right.speed_change(speed = 50, direction = 0)
     
-    while flag_trigger != True:
+    while flag_trigger == False:
+        print("flag_trigger: ", flag_trigger)
+        print("scan trigger: ", scan_trigger)
+
         pid.detect_sensor()
 
         error = pid.error_calc()
@@ -20,8 +26,8 @@ def pickup_destination(pid, motor_left, motor_right, base_speed = 20):
         motor_right.speed_change(speed = right_speed, direction = right_dir)
 
         #Put QR code scanning here
-        QR = QR.scan_for_QR()
-        if QR != 0 and scan_trigger == False:
+        QR_code = QR.scan_for_QR()
+        if QR_code!= 0 and scan_trigger == False:
             scan_trigger = True
             destination = QR
 
@@ -29,7 +35,7 @@ def pickup_destination(pid, motor_left, motor_right, base_speed = 20):
 
         if scan_trigger == True:
             #Dummy code whilst ToF is broken
-            if time.time() - dummy start > 2:
+            if time.time() - dummy_start > 2:
                 flag_trigger = True
             
             #distance = return_range_mm() #adjust distance_finder file
