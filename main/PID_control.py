@@ -3,12 +3,8 @@ from motor import *
 
 class PIDController:
 
-    def __init__(self, Kp, Ki, Kd):
+    def __init__(self, Kp):
         self.Kp = Kp #Insert values here
-        self.Ki = Ki
-        self.Kd = Kd
-        self.previous_error = 0
-        self.integral = 0
         self.sensor_values = [0, 0, 0, 0] #Place sensor values here
 
     def error_calc(self):
@@ -19,15 +15,9 @@ class PIDController:
         #Negative error implies turn left
         return weighted_sum
 
-    def correction_calc(self, error, dt):
-        #This function takes in the error calculated from error_calc and will calculate the required correction based on PID control
-        #dt should be set to the time between instances that this function is called
-
-        self.integral += error * dt
-        derivative = (error - self.previous_error) / dt
-        self.previous_error = error
+    def correction_calc(self, error):
         #Negative correction implies turn left
-        return (self.Kp * error + self.Ki * self.integral + self.Kd * derivative)
+        return (self.Kp * error)
 
     def motor_speed(self, base_speed, correction):
         #This function takes a base_speed and the correction from correct_calc to determine the desired motor speed
