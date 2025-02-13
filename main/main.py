@@ -40,11 +40,10 @@ pid = PIDController(Kp=15.0)
 base_speed = 90
 
 leave_centre(pid, Motor_left(), Motor_right(), led)
+destination = go_to_collection(pid, Motor_left(), Motor_right())
 
 #Put a timer of 4.5 mins
 while True:
-
-    destination = go_to_collection(pid, Motor_left(), Motor_right())
     pid.turn_180()
     motor_left.speed_change(speed = 90, direction = 0)
     motor_right.speed_change(speed = 90, direction = 0)
