@@ -1,5 +1,5 @@
 from machine import Pin
-from piston import *
+from main.piston import *
 
 piston1 = piston()
 

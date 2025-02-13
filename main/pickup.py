@@ -1,8 +1,9 @@
 import machine
 import time
-from piston import *
+from main.piston import *
 from QR import *
 from distance_finder import *
+from piston import *
 
 def pickup(pid, motor_left, motor_right, base_speed):
     flag_trigger = lambda: False
@@ -24,6 +25,7 @@ def pickup(pid, motor_left, motor_right, base_speed):
         QR = QR.scan_for_QR()
         if QR != 0 and scan_trigger == False:
             scan_trigger = True
+            destination = QR
 
         if scan_trigger == True:
             distance = return_range_mm() #adjust distance_finder file
@@ -33,6 +35,7 @@ def pickup(pid, motor_left, motor_right, base_speed):
                 
     # Assuming forklift is below block
     rise()
+    return(destination)
 
 def dropoff():
     fall()
