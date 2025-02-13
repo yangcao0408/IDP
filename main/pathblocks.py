@@ -25,8 +25,7 @@ def followline_until(pid, trigger, action, motor_left, motor_right, base_speed, 
     pid.detect_sensor()
 
     error = pid.error_calc()
-    dt = 0.001
-    correction = pid.correction_calc(error, dt)
+    correction = pid.correction_calc(error)
 
     left_speed, right_speed, left_dir, right_dir = pid.motor_speed(base_speed, correction)
     motor_left.speed_change(speed = left_speed, direction = left_dir)
