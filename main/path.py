@@ -2,19 +2,17 @@ from pathblocks import *
 from pickup import *
 
 # Leaves centre box
-def leave_centre(pid, motor_left, motor_right, led):
+def leave_centre_to_collection_base(pid, motor_left, motor_right, led):
     # Leave centre box first
     followline_until(pid, "t_junction", "forward", motor_left, motor_right, 90, 0)
     led.value(1)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
+    #This ends at the collection area
     
-def go_to_collection(pid, motor_left, motor_right):    
-    # Goes to right collection area
-    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
-    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
-    # Put collection code here
+def collection_base_to_inserted(pid, motor_left, motor_right):    
     destination = pickup_destination(pid, motor_left, motor_right)
     return destination
-
 
 
 # Path 1 Bottom Right
