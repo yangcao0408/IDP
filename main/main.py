@@ -41,7 +41,7 @@ base_speed = 90
 
 block_counter = 0
 
-leave_centre_to_collection(pid, Motor_left(), Motor_right(), led)
+leave_centre_to_collection_base(pid, Motor_left(), Motor_right(), led)
 
 #Put a timer of 4.5 mins
 while time.ticks_ms() < 270000 and block_counter < 4:
