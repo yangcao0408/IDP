@@ -40,9 +40,53 @@ last_time = time.ticks_ms()
 time.sleep(0.001)
 
 
-
 #Put a timer of 4.5 mins
+while True:
+    leave_centre(pid, Motor_left(), Motor_right(), 1)
+    destination = go_to_collection(pid, Motor_left(), Motor_right())
+    pid.turn_180()
+    motor_left.speed_change(speed = 90, direction = 0)
+    motor_right.speed_change(speed = 90, direction = 0)
+    time.sleep(0.5)
+    
 
+    if destination == 'A':
+        path1(pid, Motor_left(), Motor_right())
+        motor_left.speed_change(speed = 90, direction = 0)
+        motor_right.speed_change(speed = 90, direction = 0)
+        time.sleep(0.5)
+        dropoff()
+        pid.turn_180()
+        path1_return(pid, Motor_left(), Motor_right())
+
+    elif destination == 'B':
+        path2(pid, Motor_left(), Motor_right())
+        motor_left.speed_change(speed = 90, direction = 0)
+        motor_right.speed_change(speed = 90, direction = 0)
+        time.sleep(0.5)
+        dropoff()
+        pid.turn_180()
+        path2_return(pid, Motor_left(), Motor_right())
+
+    elif destination == 'C':
+        path3(pid, Motor_left(), Motor_right())
+        motor_left.speed_change(speed = 90, direction = 0)
+        motor_right.speed_change(speed = 90, direction = 0)
+        time.sleep(0.5)
+        dropoff()
+        pid.turn_180()
+        path3_return(pid, Motor_left(), Motor_right())
+
+    elif destination == 'D':
+        path4(pid, Motor_left(), Motor_right())
+        motor_left.speed_change(speed = 90, direction = 0)
+        motor_right.speed_change(speed = 90, direction = 0)
+        time.sleep(0.5)
+        dropoff()
+        pid.turn_180()
+        path4_return(pid, Motor_left(), Motor_right())
+
+'''
 leave_centre(pid, Motor_left(), Motor_right(), 1)
 go_to_collection(pid, Motor_left(), Motor_right())
 motor_left.speed_change(speed = 90, direction = 0)
@@ -60,7 +104,7 @@ followline_until(pid, "t_junction", "forward", Motor_left(), Motor_right(), 90)
 time.sleep(1.5)
 motor_left.speed_change(speed = 0, direction = 0)
 motor_right.speed_change(speed = 0, direction = 0)
-
+'''
 
 
 

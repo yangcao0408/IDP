@@ -5,7 +5,7 @@ from QR import *
 from distance_finder import *
 from piston import *
 
-def pickup(pid, motor_left, motor_right, base_speed):
+def pickup_destination(pid, motor_left, motor_right, base_speed = 20):
     flag_trigger = lambda: False
     scan_trigger = lambda: False
     
@@ -16,8 +16,8 @@ def pickup(pid, motor_left, motor_right, base_speed):
         correction = pid.correction_calc(error)
 
         left_speed, right_speed, left_dir, right_dir = pid.motor_speed(base_speed, correction)
-        motor_left.speed_change(speed = left_speed - 20, direction = left_dir)
-        motor_right.speed_change(speed = right_speed - 20, direction = right_dir)
+        motor_left.speed_change(speed = left_speed, direction = left_dir)
+        motor_right.speed_change(speed = right_speed, direction = right_dir)
 
         #Put QR code scanning here
         QR = QR.scan_for_QR()
@@ -32,9 +32,11 @@ def pickup(pid, motor_left, motor_right, base_speed):
                 flag_trigger = True
                 
     # Assuming forklift is below block
-    rise()
+    pist = piston()
+    pist.rise()
     return(destination)
 
 def dropoff():
-    fall()
+    pist = piston()
+    pist.fall()
     

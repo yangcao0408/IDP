@@ -1,4 +1,5 @@
 from pathblocks import *
+from pickup import *
 
 # Leaves centre box
 def leave_centre(pid, motor_left, motor_right, light):
@@ -13,6 +14,8 @@ def go_to_collection(pid, motor_left, motor_right):
     followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
     followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
     # Put collection code here
+    destination = pickup_destination(pid, motor_left, motor_right)
+    return destination
 
 
 
