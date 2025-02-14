@@ -6,8 +6,8 @@ def leave_centre_to_collection_base(pid, motor_left, motor_right, led):
     # Leave centre box first
     followline_until(pid, "t_junction", "forward", motor_left, motor_right, 90, 0)
     led.value(1)
-    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
-    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.7)
+    followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.8)
     #This ends at the collection area
 
 def collection_base_to_centre(pid, motor_left, motor_right, led):
@@ -19,7 +19,7 @@ def collection_base_to_centre(pid, motor_left, motor_right, led):
 def path1(pid, motor_left, motor_right):
     # Assuming from right collection area
     followline_until(pid, "left_junction", "forward", motor_left, motor_right, 90, 0)
-    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 1.9)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 2.0)
     followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 2.0)
     # Put deposit code here, vehicle is facing wall
 
@@ -104,9 +104,9 @@ def back(pid, motor_left, motor_right):
     followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90)
     followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90)
 
-def back_centre(pid, motor_left, motor_right, light):
+def back_centre(pid, motor_left, motor_right, led):
     # Assuming vehicle facing blocks
     pid.turn_180()
     followline_until(pid, "t_junction", "forward", motor_left, motor_right, 90)
-    light.value(0)
+    led.value(0)
     # Stop vehicle

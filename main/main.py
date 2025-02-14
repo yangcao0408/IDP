@@ -4,16 +4,15 @@ import time
 from motor import *
 from PID_control import *
 from path import *
+import uasyncio as asyncio
 
 button = Pin(27, Pin.IN, Pin.PULL_DOWN) # Input pin for button
 led = Pin(14, Pin.OUT)
 
-'''
 sda = Pin(16)
 scl = Pin(17) #Set pins
-id = 1
+id = 0
 i2c = I2C(id=id, sda=sda, scl=scl)
-'''
 
 button_flag = 0
 
@@ -46,53 +45,53 @@ leave_centre_to_collection_base(pid, motor_left, motor_right, led)
 
 #Put a timer of 4.5 mins
 while time.ticks_ms() - start_time < 270000 and block_counter < 4:
-    destination = pickup_destination(pid, motor_left, motor_right)
+    destination = asyncio.run(pickup_destination(pid, motor_left, motor_right, 35, i2c))
     pid.turn_180()
     motor_left.speed_change(speed = 90, direction = 0)
     motor_right.speed_change(speed = 90, direction = 0)
     time.sleep(0.5)
     
-    if destination == 'A':
-        path1(pid, Motor_left(), Motor_right())
+    if destination == 'B':
         motor_left.speed_change(speed = 90, direction = 0)
         motor_right.speed_change(speed = 90, direction = 0)
-        time.sleep(0.5)
-        dropoff()
+        time.sleep(0.2)
+        path1(pid, motor_left, motor_right)
+        dropoff(motor_left, motor_right)
         pid.turn_180()
-        path1_return(pid, Motor_left(), Motor_right())
+        path1_return(pid, motor_left, motor_right)
         block_counter += 1
 
-    elif destination == 'B':
-        path2(pid, Motor_left(), Motor_right())
+    elif destination == 'A':
         motor_left.speed_change(speed = 90, direction = 0)
         motor_right.speed_change(speed = 90, direction = 0)
-        time.sleep(0.5)
-        dropoff()
+        time.sleep(0.2)
+        path2(pid, motor_left, motor_right)
+        dropoff(motor_left, motor_right)
         pid.turn_180()
-        path2_return(pid, Motor_left(), Motor_right())
-        block_counter += 1
-
-    elif destination == 'C':
-        path3(pid, Motor_left(), Motor_right())
-        motor_left.speed_change(speed = 90, direction = 0)
-        motor_right.speed_change(speed = 90, direction = 0)
-        time.sleep(0.5)
-        dropoff()
-        pid.turn_180()
-        path3_return(pid, Motor_left(), Motor_right())
+        path2_return(pid, motor_left, motor_right)
         block_counter += 1
 
     elif destination == 'D':
-        path4(pid, Motor_left(), Motor_right())
         motor_left.speed_change(speed = 90, direction = 0)
         motor_right.speed_change(speed = 90, direction = 0)
-        time.sleep(0.5)
-        dropoff()
+        time.sleep(0.2)
+        path3(pid, motor_left, motor_right)
+        dropoff(motor_left, motor_right)
         pid.turn_180()
-        path4_return(pid, Motor_left(), Motor_right())
+        path3_return(pid, motor_left, motor_right)
         block_counter += 1
 
-collection_base_to_centre(pid, Motor_left(), Motor_right(), led)
+    elif destination == 'C':
+        motor_left.speed_change(speed = 90, direction = 0)
+        motor_right.speed_change(speed = 90, direction = 0)
+        time.sleep(0.2)
+        path4(pid, motor_left, motor_right)
+        dropoff(motor_left, motor_right)
+        pid.turn_180()
+        path4_return(pid, motor_left, motor_right)
+        block_counter += 1
+
+collection_base_to_centre(pid, motor_left, motor_right, led)
 
 '''
 leave_centre(pid, Motor_left(), Motor_right(), 1)

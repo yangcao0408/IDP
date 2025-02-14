@@ -9,7 +9,7 @@ class PIDController:
 
     def error_calc(self):
         #This function takes in a list of binary sensor values and outputs the error value of the system
-        weights = [-2, -1, 1, 2]
+        weights = [-3, -1, 1, 3]
         #This assigns the weight of each sensor, ideal is therefore zero, while negative requires left turn, positive requires right
         weighted_sum = sum(weight * value for weight, value in zip(weights, self.sensor_values))
         #Negative error implies turn left
@@ -21,8 +21,8 @@ class PIDController:
 
     def motor_speed(self, base_speed, correction):
         #This function takes a base_speed and the correction from correct_calc to determine the desired motor speed
-        left_speed = base_speed + correction
-        right_speed = base_speed - correction
+        left_speed = base_speed + (correction * base_speed / 90)
+        right_speed = base_speed - (correction * base_speed / 90) # Making sure that correction at slow speeds are less violent
         
         left_speed_abs = abs(left_speed)
         right_speed_abs = abs(right_speed)
@@ -82,7 +82,7 @@ class PIDController:
         motor_left.speed_change(speed = 70, direction = 0)
         motor_right.speed_change(speed = 70, direction = 1)
 
-        time.sleep(2.3)
+        time.sleep(2.5)
 
         motor_left.speed_change(speed = 90, direction = 0)
         motor_right.speed_change(speed = 90, direction = 0)
