@@ -32,10 +32,10 @@ async def check_tof_sensor(tof_trigger):
     tof.set_Vcsel_pulse_period(tof.vcsel_period_type[1], 8)
 
     distance = 999  # Dummy initial value
-    while distance >= 50:  # Keep checking distance until below 50mm
+    while distance >= 100:  # Keep checking distance until below 100mm
         distance = return_range_mm(tof)
         print('Distance:', distance)
-        if distance < 50:
+        if distance < 100:
             tof_trigger.set()  # Notify that ToF condition is met
             break
         await asyncio.sleep(0.1)  # Yield execution
