@@ -13,7 +13,7 @@ class piston:
         self.piston_speed.duty_u16(int(65535*100/100))
 
         #Can still change
-        time.sleep(3)
+        time.sleep(3.0)
         self.piston_speed.duty_u16(int(65535*0/100))
 
     def fall(self):
@@ -21,5 +21,5 @@ class piston:
         self.piston_speed.duty_u16(int(65535*100/100))
 
         #Can still change
-        time.sleep(3.5)
+        time.sleep(3.0)
         self.piston_speed.duty_u16(int(65535*0/100))

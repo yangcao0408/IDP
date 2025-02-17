@@ -7,9 +7,8 @@ class PIDController:
         self.Kp = Kp #Insert values here
         self.sensor_values = [0, 0, 0, 0] #Place sensor values here
 
-    def error_calc(self):
+    def error_calc(self, weights  = [-3, -1, 1, 3]): #manually enter weights here
         #This function takes in a list of binary sensor values and outputs the error value of the system
-        weights = [0, -1, 1, 0] #With high enough Kp, can ignore the rest of the sensors
         #This assigns the weight of each sensor, ideal is therefore zero, while negative requires left turn, positive requires right
         weighted_sum = sum(weight * value for weight, value in zip(weights, self.sensor_values))
         #Negative error implies turn left

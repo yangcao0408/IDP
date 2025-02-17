@@ -14,13 +14,13 @@ async def scan_QR_concurrently(i2c, scan_trigger, destination):
         if QR_code != 0:
             scan_trigger.set()  # Notify that QR has been found
             destination.append(QR_code)  # Store destination
-            print('destination:', QR_code)
+            #print('destination:', QR_code)
             break  # Stop scanning once QR is found
         await asyncio.sleep(0.1)  # Yield execution
 
 async def check_tof_sensor(tof_trigger):
     #Asynchronously monitors the ToF sensor after QR scan.
-    print("Starting ToF sensor monitoring...")
+    #print("Starting ToF sensor monitoring...")
 
     tof_sda = Pin(18)
     tof_scl = Pin(19)
@@ -37,7 +37,7 @@ async def check_tof_sensor(tof_trigger):
         #print('Distance:', distance)
         if distance < 100:
             tof_trigger.set()  # Notify that ToF condition is met
-            time.sleep(0.1) # Wait for block to get slotted in
+            await asyncio.sleep(0.3) # Wait for block to get slotted in
             break
         await asyncio.sleep(0.1)  # Yield execution
 
@@ -45,7 +45,7 @@ async def line_following(pid, motor_left, motor_right, base_speed, stop_event):
     #Continuously runs line following until stop_event is set.
     while not stop_event.is_set():
         pid.detect_sensor()
-        error = pid.error_calc()
+        error = pid.error_calc([0, -1, 1, 0])
         correction = pid.correction_calc(error)
 
         left_speed, right_speed, left_dir, right_dir = pid.motor_speed(base_speed, correction)
@@ -71,7 +71,7 @@ async def pickup_destination(pid, motor_left, motor_right, base_speed, i2c):
     # Wait for both QR scanning and ToF sensor check to complete
     await asyncio.gather(qr_task, tof_task)
 
-    print("QR scan and ToF sensor check completed. Stopping.")
+    #print("QR scan and ToF sensor check completed. Stopping.")
 
     # Stop motors **after both tasks are done**
     stop_event.set()
