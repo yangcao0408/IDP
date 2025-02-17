@@ -55,9 +55,6 @@ def path2_return(pid, motor_left, motor_right):
     followline_until(pid, "right_junction", "forward", motor_left, motor_right, 90, 0)
     followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
 
-    # Put collection code here
-
-
 # Path 3 Top Right (Goes to D)
 def path3(pid, motor_left, motor_right):
     # Assuming from right collection area
@@ -77,8 +74,6 @@ def path3_return(pid, motor_left, motor_right):
     followline_until(pid, "right_junction", "turn_right", motor_left, motor_right, 90, 1.9)
     followline_until(pid, "right_junction", "forward", motor_left, motor_right, 90, 0)
     followline_until(pid, "right_junction", "forward", motor_left, motor_right, 90, 0)
-    # Put collection code here
-
 
 # Path 4 Top Left (Goes to C)
 def path4(pid, motor_left, motor_right):
@@ -102,7 +97,6 @@ def path4_return(pid, motor_left, motor_right):
     followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.8)
     followline_until(pid, "right_junction", "forward", motor_left, motor_right, 90, 0)
     # Put collection code here
-
 
 # Returning to starting point when insufficient time
 def back(pid, motor_left, motor_right):
