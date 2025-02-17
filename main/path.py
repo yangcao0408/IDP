@@ -15,7 +15,7 @@ def collection_base_to_centre(pid, motor_left, motor_right, led):
     led.value(0)
 
 
-# Path 1 Bottom Right
+# Path 1 Bottom Right (Goes to B)
 def path1(pid, motor_left, motor_right):
     # Assuming from right collection area
     followline_until(pid, "left_junction", "forward", motor_left, motor_right, 90, 0)
@@ -28,15 +28,12 @@ def path1_return(pid, motor_left, motor_right):
     # Vehicle is parallel to the destination, facing outwards
     followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
     followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.6)
-    #########Changed for testing purposes
-    #########
-    #########
-    followline_until(pid, "right_junction", "turn_right", motor_left, motor_right, 90, 1.8)
+    # Now on the line before collection area i.e. as if reversed
     # Put collection code here
 
     
 
-# Path 2 Bottom Left
+# Path 2 Bottom Left (Goes to A)
 def path2(pid, motor_left, motor_right):
     # Assuming from right collection area
     followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90)
@@ -55,7 +52,7 @@ def path2_return(pid, motor_left, motor_right):
     # Put collection code here
 
 
-# Path 3 Top Right
+# Path 3 Top Right (Goes to D)
 def path3(pid, motor_left, motor_right):
     # Assuming from right collection area
     followline_until(pid, "left_junction", "forward", motor_left, motor_right, 90)
@@ -75,7 +72,7 @@ def path3_return(pid, motor_left, motor_right):
     # Put collection code here
 
 
-# Path 4 Top Left
+# Path 4 Top Left (Goes to C)
 def path4(pid, motor_left, motor_right):
     # Assuming from right collection area
     followline_until(pid, "left_junction", "forward", motor_left, motor_right, 90)
