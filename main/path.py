@@ -20,7 +20,10 @@ def path1(pid, motor_left, motor_right):
     # Assuming from right collection area
     followline_until(pid, "left_junction", "forward", motor_left, motor_right, 90, 0)
     followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 2.0)
-    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 2.0)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 2.2)
+    motor_left.speed_change(speed = 90, direction = 0)
+    motor_right.speed_change(speed = 90, direction = 0)
+    time.sleep(0.3)
     # Put deposit code here, vehicle is facing wall
 
 def path1_return(pid, motor_left, motor_right):

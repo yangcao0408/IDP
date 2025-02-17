@@ -8,7 +8,7 @@ import uasyncio as asyncio
 from vl53l0x import VL53L0X
 
 async def scan_QR_concurrently(i2c, scan_trigger, destination):
-    """Asynchronously scans for a QR code and sets scan_trigger when detected."""
+    #Asynchronously scans for a QR code and sets scan_trigger when detected.
     while True:
         QR_code = scan_for_QR(0.1, i2c)
         if QR_code != 0:
@@ -19,7 +19,7 @@ async def scan_QR_concurrently(i2c, scan_trigger, destination):
         await asyncio.sleep(0.1)  # Yield execution
 
 async def check_tof_sensor(tof_trigger):
-    """Asynchronously monitors the ToF sensor after QR scan."""
+    #Asynchronously monitors the ToF sensor after QR scan.
     print("Starting ToF sensor monitoring...")
 
     tof_sda = Pin(18)
@@ -34,14 +34,15 @@ async def check_tof_sensor(tof_trigger):
     distance = 999  # Dummy initial value
     while distance >= 100:  # Keep checking distance until below 100mm
         distance = return_range_mm(tof)
-        print('Distance:', distance)
+        #print('Distance:', distance)
         if distance < 100:
             tof_trigger.set()  # Notify that ToF condition is met
+            time.sleep(0.1) # Wait for block to get slotted in
             break
         await asyncio.sleep(0.1)  # Yield execution
 
 async def line_following(pid, motor_left, motor_right, base_speed, stop_event):
-    """Continuously runs line following until stop_event is set."""
+    #Continuously runs line following until stop_event is set.
     while not stop_event.is_set():
         pid.detect_sensor()
         error = pid.error_calc()
@@ -54,13 +55,10 @@ async def line_following(pid, motor_left, motor_right, base_speed, stop_event):
         await asyncio.sleep(0.01)  # Yield execution to other tasks
 
 async def pickup_destination(pid, motor_left, motor_right, base_speed, i2c):
-    """Runs line following, QR scanning, and ToF sensor checking asynchronously."""
+    #Runs line following, QR scanning, and ToF sensor checking asynchronously.
     scan_trigger = asyncio.Event()  # QR code detection flag
     tof_trigger = asyncio.Event()   # ToF sensor flag
     destination = []  # Store destination
-
-    motor_left.speed_change(speed=50, direction=0)
-    motor_right.speed_change(speed=50, direction=0)
 
     # Start line following
     stop_event = asyncio.Event()
