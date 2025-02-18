@@ -44,7 +44,7 @@ leave_centre_to_collection_base(pid, motor_left, motor_right, led)
 
 #Put a timer of 4.5 mins
 while time.ticks_ms() - start_time < 270000 and block_counter < 4:
-    pid.reverse(1.5)
+    pid.reverse(1.0)
     destination = asyncio.run(pickup_destination(pid, motor_left, motor_right, 50, i2c))
     pid.turn_180()
     motor_left.speed_change(speed = 90, direction = 0)
@@ -94,27 +94,7 @@ while time.ticks_ms() - start_time < 270000 and block_counter < 4:
         path4_return(pid, motor_left, motor_right)
         block_counter += 1
 
-collection_base_to_centre(pid, motor_left, motor_right, led)
-
-'''
-leave_centre(pid, Motor_left(), Motor_right(), 1)
-go_to_collection(pid, Motor_left(), Motor_right())
-motor_left.speed_change(speed = 90, direction = 0)
-motor_right.speed_change(speed = 90, direction = 0)
-time.sleep(0.5)
-pid.turn_180()
-path1(pid, Motor_left(), Motor_right())
-motor_left.speed_change(speed = 90, direction = 0)
-motor_right.speed_change(speed = 90, direction = 0)
-time.sleep(0.5)
-pid.turn_180()
-path1_return(pid, Motor_left(), Motor_right())
-followline_until(pid, "left_junction", "turn_left", Motor_left(), Motor_right(), 90)
-followline_until(pid, "t_junction", "forward", Motor_left(), Motor_right(), 90)
-time.sleep(1.5)
-motor_left.speed_change(speed = 0, direction = 0)
-motor_right.speed_change(speed = 0, direction = 0)
-'''
+back(pid, motor_left, motor_right, led)
 
 
 

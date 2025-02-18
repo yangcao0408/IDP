@@ -10,10 +10,6 @@ def leave_centre_to_collection_base(pid, motor_left, motor_right, led):
     followline_until(pid, "t_junction", "turn_right", motor_left, motor_right, 90, 1.75)
     #This ends at the collection area
 
-def collection_base_to_centre(pid, motor_left, motor_right, led):
-    #insert stuff here
-    led.value(0)
-
 
 # Path 1 Bottom Right (Goes to B)
 def path1(pid, motor_left, motor_right):
@@ -99,15 +95,16 @@ def path4_return(pid, motor_left, motor_right):
     # Put collection code here
 
 # Returning to starting point when insufficient time
-def back(pid, motor_left, motor_right):
+def back(pid, motor_left, motor_right, led):
     # Assuming at collection area, facing collecting area
     # Reverse vehicle direction
+    pid.reverse(1.0)
+    followline_until(pid, "right_junction", "turn_right", motor_left, motor_right, 90, 2.0)
     followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 2.0)
-    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 2.0)
-
-def back_centre(pid, motor_left, motor_right, led):
-    # Assuming vehicle facing blocks
-    pid.turn_180()
     followline_until(pid, "t_junction", "forward", motor_left, motor_right, 90, 0)
     led.value(0)
+    time.sleep(3)
+    motor_left.speed_change(speed = 0, direction = 0)
+    motor_right.speed_change(speed = 0, direction = 0)
+
     # Stop vehicle
