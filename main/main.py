@@ -44,7 +44,7 @@ leave_centre_to_collection_base(pid, motor_left, motor_right, led)
 
 #Put a timer of 4.5 mins
 while time.ticks_ms() - start_time < 270000 and block_counter < 4:
-    pid.reverse(1.0)
+    pid.reverse(1.6)
     destination = asyncio.run(pickup_destination(pid, motor_left, motor_right, 50, i2c))
     pid.turn_180()
     motor_left.speed_change(speed = 90, direction = 0)
