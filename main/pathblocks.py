@@ -49,7 +49,7 @@ def followline_until(pid, trigger, action, motor_left, motor_right, base_speed, 
     motor_left.speed_change(speed = 70, direction = 1)
     motor_right.speed_change(speed = 70, direction = 1)
     time.sleep(0.3)
-  # Reinitialise
+  # Reinitialise motor speed after action
   motor_left.speed_change(speed = 90, direction = 0)
   motor_right.speed_change(speed = 90, direction = 0)
   pid.sensor_values = [0, 0, 0, 0]

@@ -12,7 +12,7 @@ class piston:
         self.piston_dir.value(0)
         self.piston_speed.duty_u16(int(65535*100/100))
 
-        #Can still change
+        # Rise for 3 seconds
         time.sleep(3.0)
         self.piston_speed.duty_u16(int(65535*0/100))
 
@@ -20,6 +20,6 @@ class piston:
         self.piston_dir.value(1)
         self.piston_speed.duty_u16(int(65535*100/100))
 
-        #Can still change
+        # Drop for 3 seconds
         time.sleep(3.0)
         self.piston_speed.duty_u16(int(65535*0/100))

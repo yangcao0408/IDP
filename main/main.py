@@ -7,10 +7,11 @@ from path import *
 import uasyncio as asyncio
 
 button = Pin(27, Pin.IN, Pin.PULL_DOWN) # Input pin for button
-led = Pin(14, Pin.OUT)
+led = Pin(14, Pin.OUT) # Output pin for LED
 
+# Input pins for QR code sensor
 sda = Pin(16)
-scl = Pin(17) #Set pins
+scl = Pin(17)
 id = 0
 i2c = I2C(id=id, sda=sda, scl=scl)
 

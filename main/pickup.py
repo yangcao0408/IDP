@@ -20,8 +20,8 @@ async def scan_QR_concurrently(i2c, scan_trigger, destination):
 
 async def check_tof_sensor(tof_trigger):
     #Asynchronously monitors the ToF sensor after QR scan.
-    #print("Starting ToF sensor monitoring...")
 
+    # Setting pins for tof sensor
     tof_sda = Pin(18)
     tof_scl = Pin(19)
     tof_id = 1
@@ -34,7 +34,6 @@ async def check_tof_sensor(tof_trigger):
     distance = 999  # Dummy initial value
     while distance >= 100:  # Keep checking distance until below 100mm
         distance = return_range_mm(tof)
-        #print('Distance:', distance)
         if distance < 100:
             tof_trigger.set()  # Notify that ToF condition is met
             await asyncio.sleep(0.01) # Wait for block to get slotted in
@@ -88,6 +87,7 @@ async def pickup_destination(pid, motor_left, motor_right, base_speed, i2c):
 
 
 def dropoff(motor_left, motor_right):
+    # Dropping off block, simple execution
     motor_left.speed_change(speed = 0, direction = 0)
     motor_right.speed_change(speed = 0, direction = 0)
     pist = piston()
