@@ -37,7 +37,7 @@ async def check_tof_sensor(tof_trigger):
         #print('Distance:', distance)
         if distance < 100:
             tof_trigger.set()  # Notify that ToF condition is met
-            await asyncio.sleep(0.25) # Wait for block to get slotted in
+            await asyncio.sleep(0.2) # Wait for block to get slotted in
             break
         await asyncio.sleep(0.1)  # Yield execution
 

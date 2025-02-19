@@ -57,7 +57,7 @@ def path3(pid, motor_left, motor_right):
     followline_until(pid, "left_junction", "forward", motor_left, motor_right, 90, 0)
     followline_until(pid, "left_junction", "forward", motor_left, motor_right, 90, 0)
     followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 2.5)
-    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 2.5)
+    followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 2.2)
     # Put deposit code here, vehicle is facing wall
     motor_left.speed_change(speed = 90, direction = 0)
     motor_right.speed_change(speed = 90, direction = 0)
@@ -103,7 +103,7 @@ def back(pid, motor_left, motor_right, led):
     followline_until(pid, "left_junction", "turn_left", motor_left, motor_right, 90, 2.0)
     followline_until(pid, "t_junction", "forward", motor_left, motor_right, 90, 0)
     led.value(0)
-    time.sleep(3)
+    time.sleep(1.5)
     motor_left.speed_change(speed = 0, direction = 0)
     motor_right.speed_change(speed = 0, direction = 0)
 
